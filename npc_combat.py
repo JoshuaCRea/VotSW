@@ -4,21 +4,21 @@ import random
 def get_attack_value():
     atk = random.randint(1, 6)
     if atk == 1 or atk == 6:
-        return "Attack High"
+        return "Hi"
     elif atk == 2 or atk == 5:
-        return "Attack Middle"
+        return "Mid"
     elif atk == 3 or atk == 4:
-        return "Attack Low"
+        return "Lo"
 
 
 def get_blk_value():
     blk = random.randint(1, 6)
     if blk == 1 or blk == 6:
-        return "Defend High"
+        return "Hi"
     elif blk == 2 or blk == 5:
-        return "Defend Middle"
+        return "Mid"
     elif blk == 3 or blk == 4:
-        return "Defend Low"
+        return "Lo"
 
 
 def get_mod_value():
