@@ -24,8 +24,8 @@ def get_blk_value():
 def get_mod_value():
     mod = random.randint(1, 6)
     if mod == 1:
-        return "Wolf Mod"
+        return "Wolf"
     elif mod == 6:
-        return "Star Mod"
+        return "Star"
     else:
         return "Normal"
