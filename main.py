@@ -19,10 +19,11 @@ def get_mod_message(mod_value):
 
 
 def clash(pa, pb, ph, ka, kb, kh):
-    if pa != kb:
-        kh -= 1
     if ka != pb:
         ph -= 1
+    if pa != kb:
+        kh -= 1
+    return ph, kh
 
 
 player_hp = 3
@@ -51,8 +52,8 @@ print(f'KoS mod: {kos_mod}')
 print(f'Kos mod msg: {kos_mod_message}')
 
 
-# calc results, sub HP from whom
-clash(player_atk, player_blk, player_hp, kos_atk, kos_blk, kos_hp)
+print('\n*** CLASH ***')
+player_hp, kos_hp = clash(player_atk, player_blk, player_hp, kos_atk, kos_blk, kos_hp)
 
 print('\n== AFTER CLASH ==')
 print(f'Player HP: {player_hp}')
