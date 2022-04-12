@@ -10,12 +10,12 @@ from npc_combat import get_attack_value, get_blk_value, get_mod_value
 ●  	ACTIVATION PHASE - This is when you activate technique cards that will be played in the next clash. No more than 1 Technique per player may be played in a single clash.
 '''
 
-def get_mod_msg(mod_value):
+def get_mod_message(mod_value):
     if mod_value == "Wolf":
         return "Defense is reversal."
     if mod_value == "Star":
         return "Defense is reversal."
-    return "Normal"
+    return "No modification."
 
 
 def clash(pa, pb, ph, ka, kb, kh):
@@ -34,9 +34,9 @@ kos_hp = 3
 kos_atk = get_attack_value()
 kos_blk = get_blk_value()
 kos_mod = get_mod_value()
-# kos_mod_msg = get_mod_
+kos_mod_message = get_mod_message(kos_mod)
 
-print('BEFORE CLASH')
+print('== BEFORE CLASH ==')
 print(f'Player HP: {player_hp}')
 print(f'Player atk: {player_atk}')
 print(f'Player blk: {player_blk}')
@@ -48,13 +48,13 @@ print(f'Kos HP: {kos_hp}')
 print(f'KoS atk: {kos_atk}')
 print(f'KoS blk: {kos_blk}')
 print(f'KoS mod: {kos_mod}')
-# print(f'Kos mod msg: {kos_mod_msg}')
+print(f'Kos mod msg: {kos_mod_message}')
 
 
 # calc results, sub HP from whom
 clash(player_atk, player_blk, player_hp, kos_atk, kos_blk, kos_hp)
 
-print('\nAFTER CLASH')
+print('\n== AFTER CLASH ==')
 print(f'Player HP: {player_hp}')
 print(f'Player atk: {player_atk}')
 print(f'Player blk: {player_blk}')
@@ -66,7 +66,7 @@ print(f'Kos HP: {kos_hp}')
 print(f'KoS atk: {kos_atk}')
 print(f'KoS blk: {kos_blk}')
 print(f'KoS mod: {kos_mod}')
-# print(f'Kos mod msg: {kos_mod_msg}')
+print(f'Kos mod msg: {kos_mod_message}')
 
 
 
