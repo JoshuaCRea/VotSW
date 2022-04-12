@@ -26,13 +26,13 @@ def clash(pa, pb, ph, ka, kb, kh):
     return ph, kh
 
 
-player_hp = 3
+player_hp = 5
 player_atk = "Hi"
 player_blk = "Lo"
 player_mod = "Normal"
 player_mod_message = get_mod_message(player_mod)
 
-kos_hp = 3
+kos_hp = 5
 kos_atk = get_attack_value()
 kos_blk = get_blk_value()
 kos_mod = get_mod_value()
@@ -53,8 +53,9 @@ print(f'KoS blk: {kos_blk}')
 print(f'KoS mod: {kos_mod}')
 print(f'Kos mod msg: {kos_mod_message}')
 
-
-for i in range(10):
+i = 0
+while player_hp > 0 and kos_hp > 0:
+    i += 1
     kos_atk = get_attack_value()
     kos_blk = get_blk_value()
 
@@ -62,7 +63,6 @@ for i in range(10):
 
     print(f'\n== AFTER CLASH {i} ==')
     print(f'Player HP: {player_hp}')
-
     print(f'Kos HP: {kos_hp}')
 
 
