@@ -53,12 +53,17 @@ print(f'KoS blk: {kos_blk}')
 print(f'KoS mod: {kos_mod}')
 print(f'Kos mod msg: {kos_mod_message}')
 
-player_hp, kos_hp = clash(player_atk, player_blk, player_hp, kos_atk, kos_blk, kos_hp)
 
-print('\n== AFTER CLASH ==')
-print(f'Player HP: {player_hp}')
+for i in range(10):
+    kos_atk = get_attack_value()
+    kos_blk = get_blk_value()
 
-print(f'Kos HP: {kos_hp}')
+    player_hp, kos_hp = clash(player_atk, player_blk, player_hp, kos_atk, kos_blk, kos_hp)
+
+    print(f'\n== AFTER CLASH {i} ==')
+    print(f'Player HP: {player_hp}')
+
+    print(f'Kos HP: {kos_hp}')
 
 
 
