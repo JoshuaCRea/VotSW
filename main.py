@@ -1,6 +1,14 @@
 from npc_combat import get_attack_value, get_blk_value, get_mod_value
-from keeper_of_scrolls import KeeperOfScrolls
+# from keeper_of_scrolls import KeeperOfScrolls
 
+
+'''
+●   SELECTION PHASE - Combatants select 1 card from hand and place it on the table face down. Each player will then announce how they will play that card by stating the number associated to the Special they intend to use on that particular card.
+●  	REVEAL STEP - Both players flip card face up, and immediately place a stone on top if applicable.
+●  	REACTION PHASE - Each player may make one reaction, if Specials or Techniques allow for it. This phase is also where Non-Player Adversaries will apply the effects of the White Die, unless otherwise noted. A player who has chosen “stumble” can change his or her special selection during this phase.
+●  	CALCULATION STEP - Determine what happened in this clash. Subtract applicable HP.
+●  	ACTIVATION PHASE - This is when you activate technique cards that will be played in the next clash. No more than 1 Technique per player may be played in a single clash.
+'''
 
 def get_mod_msg(mod_value):
     if mod_value == "Wolf":
@@ -10,27 +18,55 @@ def get_mod_msg(mod_value):
     return "Normal"
 
 
+def clash(pa, pb, ph, ka, kb, kh):
+    if pa != kb:
+        kh -= 1
+    if ka != pb:
+        ph -= 1
+
+
+player_hp = 3
 player_atk = "Hi"
 player_blk = "Lo"
 player_mod = "Normal"
 
+kos_hp = 3
 kos_atk = get_attack_value()
 kos_blk = get_blk_value()
 kos_mod = get_mod_value()
-kos_mod_msg = get_mod_msg(kos_mod)
+# kos_mod_msg = get_mod_
 
-
+print('BEFORE CLASH')
+print(f'Player HP: {player_hp}')
 print(f'Player atk: {player_atk}')
 print(f'Player blk: {player_blk}')
 print(f'Player mod: {player_mod}')
+
 print()
+
+print(f'Kos HP: {kos_hp}')
 print(f'KoS atk: {kos_atk}')
 print(f'KoS blk: {kos_blk}')
 print(f'KoS mod: {kos_mod}')
-print(f'Kos mod msg: {kos_mod_msg}')
+# print(f'Kos mod msg: {kos_mod_msg}')
 
 
+# calc results, sub HP from whom
+clash(player_atk, player_blk, player_hp, kos_atk, kos_blk, kos_hp)
 
+print('\nAFTER CLASH')
+print(f'Player HP: {player_hp}')
+print(f'Player atk: {player_atk}')
+print(f'Player blk: {player_blk}')
+print(f'Player mod: {player_mod}')
+
+print()
+
+print(f'Kos HP: {kos_hp}')
+print(f'KoS atk: {kos_atk}')
+print(f'KoS blk: {kos_blk}')
+print(f'KoS mod: {kos_mod}')
+# print(f'Kos mod msg: {kos_mod_msg}')
 
 
 
