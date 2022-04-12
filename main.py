@@ -30,6 +30,7 @@ player_hp = 3
 player_atk = "Hi"
 player_blk = "Lo"
 player_mod = "Normal"
+player_mod_message = get_mod_message(player_mod)
 
 kos_hp = 3
 kos_atk = get_attack_value()
@@ -42,6 +43,7 @@ print(f'Player HP: {player_hp}')
 print(f'Player atk: {player_atk}')
 print(f'Player blk: {player_blk}')
 print(f'Player mod: {player_mod}')
+print(f'Player mod msg: {player_mod_message}')
 
 print()
 
@@ -51,23 +53,12 @@ print(f'KoS blk: {kos_blk}')
 print(f'KoS mod: {kos_mod}')
 print(f'Kos mod msg: {kos_mod_message}')
 
-
-print('\n*** CLASH ***')
 player_hp, kos_hp = clash(player_atk, player_blk, player_hp, kos_atk, kos_blk, kos_hp)
 
 print('\n== AFTER CLASH ==')
 print(f'Player HP: {player_hp}')
-print(f'Player atk: {player_atk}')
-print(f'Player blk: {player_blk}')
-print(f'Player mod: {player_mod}')
-
-print()
 
 print(f'Kos HP: {kos_hp}')
-print(f'KoS atk: {kos_atk}')
-print(f'KoS blk: {kos_blk}')
-print(f'KoS mod: {kos_mod}')
-print(f'Kos mod msg: {kos_mod_message}')
 
 
 
