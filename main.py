@@ -1,5 +1,4 @@
 from npc_combat import get_attack_value, get_blk_value, get_mod_value
-# from keeper_of_scrolls import KeeperOfScrolls
 
 
 '''
@@ -33,10 +32,6 @@ player_mod = "Normal"
 player_mod_message = get_mod_message(player_mod)
 
 kos_hp = 5
-kos_atk = get_attack_value()
-kos_blk = get_blk_value()
-kos_mod = get_mod_value()
-kos_mod_message = get_mod_message(kos_mod)
 
 print('== BEFORE CLASH ==')
 print(f'Player HP: {player_hp}')
@@ -48,22 +43,27 @@ print(f'Player mod msg: {player_mod_message}')
 print()
 
 print(f'Kos HP: {kos_hp}')
-print(f'KoS atk: {kos_atk}')
-print(f'KoS blk: {kos_blk}')
-print(f'KoS mod: {kos_mod}')
-print(f'Kos mod msg: {kos_mod_message}')
 
 i = 0
 while player_hp > 0 and kos_hp > 0:
     i += 1
     kos_atk = get_attack_value()
     kos_blk = get_blk_value()
+    kos_mod = get_mod_value()
+    kos_mod_message = get_mod_message(kos_mod)
 
     player_hp, kos_hp = clash(player_atk, player_blk, player_hp, kos_atk, kos_blk, kos_hp)
+    if player_atk == kos_blk and kos_mod == "Wolf" or kos_mod == "Star":
+        player_hp -= 1
 
     print(f'\n== AFTER CLASH {i} ==')
     print(f'Player HP: {player_hp}')
-    print(f'Kos HP: {kos_hp}')
+    print(f'Kos HP: {kos_hp}\n')
+
+    print(f'KoS atk: {kos_atk}')
+    print(f'KoS blk: {kos_blk}')
+    print(f'KoS mod: {kos_mod}')
+    print(f'Kos mod msg: {kos_mod_message}')
 
 
 
