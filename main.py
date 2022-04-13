@@ -1,4 +1,5 @@
 from npc_combat import get_attack_value, get_blk_value, get_mod_value
+from combat_card import get_combat_cards
 
 
 '''
@@ -8,6 +9,10 @@ from npc_combat import get_attack_value, get_blk_value, get_mod_value
 ●  	CALCULATION STEP - Determine what happened in this clash. Subtract applicable HP.
 ●  	ACTIVATION PHASE - This is when you activate technique cards that will be played in the next clash. No more than 1 Technique per player may be played in a single clash.
 '''
+
+#select card (A-E)
+#select special (1, 2, or 3)
+#hit enter (play the clash)
 
 def get_mod_message(mod_value):
     if mod_value == "Wolf":
@@ -23,6 +28,13 @@ def clash(pa, pb, ph, ka, kb, kh):
     if pa != kb:
         kh -= 1
     return ph, kh
+
+
+
+combat_cards = get_combat_cards()
+for card in combat_cards:
+    print(f'{card.attack} {card.block}')
+
 
 
 player_hp = 5
