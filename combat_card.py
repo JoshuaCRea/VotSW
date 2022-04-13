@@ -15,15 +15,15 @@ Other five reamin in list
 '''
 
 
-class Card:
+class Combat_Card:
     def __init__(self, attack, block):
         self.attack = attack
         self.block = block
 
 
-card1 = Card("Hi", "Hi")
-card2 = Card("Hi", "Mid")
-card3 = Card("Hi", "Lo")
+card1 = Combat_Card("Hi", "Hi")
+card2 = Combat_Card("Hi", "Mid")
+card3 = Combat_Card("Hi", "Lo")
 
 print(card1.attack)
 print(card1.block)
