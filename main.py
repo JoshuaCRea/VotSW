@@ -75,7 +75,7 @@ while player_hp > 0 and kos_hp > 0:
     i += 1
 
 
-
+print("\n******\n\nTASK: REMOVE THIS MESSAGE, COMMIT THE CHANGE LOCALLY, THEN USE `git push` TO PUSH THE CHANGE(S) TO GITHUB\n\n******")
 
 
 
