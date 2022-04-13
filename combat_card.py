@@ -21,18 +21,17 @@ class Combat_Card:
         self.block = block
 
 
-card1 = Combat_Card("Hi", "Hi")
-card2 = Combat_Card("Hi", "Mid")
-card3 = Combat_Card("Hi", "Lo")
-card4 = Combat_Card("Mid", "Hi")
-card5 = Combat_Card("Mid", "Mid")
-card6 = Combat_Card("Mid", "Lo")
-card7 = Combat_Card("Lo", "Hi")
-card8 = Combat_Card("Lo", "Mid")
-card9 = Combat_Card("Lo", "Lo")
-card10 = Combat_Card("Mid", "Lo")
+def get_combat_cards():
+    card1 = Combat_Card("Hi", "Hi")
+    card2 = Combat_Card("Hi", "Mid")
+    card3 = Combat_Card("Hi", "Lo")
+    card4 = Combat_Card("Mid", "Hi")
+    card5 = Combat_Card("Mid", "Mid")
+    card6 = Combat_Card("Mid", "Lo")
+    card7 = Combat_Card("Lo", "Hi")
+    card8 = Combat_Card("Lo", "Mid")
+    card9 = Combat_Card("Lo", "Lo")
+    card10 = Combat_Card("Mid", "Lo")
 
-combat_cards = [card1, card2, card3, card4, card5, card6, card7, card8, card9, card10]
-
-for card in combat_cards:
-    print(f'{card.attack} {card.block}')
+    combat_cards = [card1, card2, card3, card4, card5, card6, card7, card8, card9, card10]
+    return combat_cards
