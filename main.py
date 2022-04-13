@@ -31,12 +31,8 @@ def clash(pa, pb, ph, ka, kb, kh):
     return ph, kh
 
 
-
 combat_cards = get_combat_cards()
 random.shuffle(combat_cards)
-# for card in combat_cards:
-    # print(f'{card.attack} {card.block}')
-
 
 player_hp = 5
 kos_hp = 5
@@ -44,13 +40,11 @@ kos_hp = 5
 print(f'Player HP: {player_hp}')
 print(f'Kos HP: {kos_hp}')
 
-
 i = 0
 while player_hp > 0 and kos_hp > 0:
-    i += 1
-
-    player_atk = "Hi"
-    player_blk = "Lo"
+    player_atk = combat_cards[0].attack
+    player_blk = combat_cards[0].block
+    combat_cards.pop(0)
     player_mod = "Normal"
     player_mod_message = get_mod_message(player_mod)
 
@@ -74,6 +68,11 @@ while player_hp > 0 and kos_hp > 0:
     print(f'Kos mod msg: {kos_mod_message}')
     print(f'\nPlayer HP: {player_hp}')
     print(f'Kos HP: {kos_hp}')
+
+    if len(combat_cards) == 0:
+        break
+
+    i += 1
 
 
 
