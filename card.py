@@ -21,6 +21,13 @@ class Card:
         self.block = block
 
 
-foo = Card("FooAttack", "BarBlock")
-print(foo.attack)
-print(foo.block)
+card1 = Card("Hi", "Hi")
+card2 = Card("Hi", "Mid")
+card3 = Card("Hi", "Lo")
+
+print(card1.attack)
+print(card1.block)
+print(card2.attack)
+print(card2.block)
+print(card3.attack)
+print(card3.block)
