@@ -42,8 +42,15 @@ print("\nAvailable Player Combat Cards:")
 combat_cards = get_combat_cards()
 random.shuffle(combat_cards)
 round_one_hand = combat_cards[0:5]
+
+i = 1
 for card in round_one_hand:
-    print(card)
+    print(f'{i}: {card}')
+    i += 1
+
+selected_card_number = int(input('\nPlayer, please select a card [1-5]: '))
+print(f'You chose card # {selected_card_number}')
+print(f'...which is this card: {round_one_hand[selected_card_number - 1]}')
 
 i = 0
 while player_hp > 0 and kos_hp > 0:
