@@ -11,9 +11,6 @@ import random
 ●  	ACTIVATION PHASE - This is when you activate technique cards that will be played in the next clash. No more than 1 Technique per player may be played in a single clash.
 '''
 
-#select card (A-E)
-#select special (1, 2, or 3)
-#hit enter (play the clash)
 
 def get_mod_message(mod_value):
     if mod_value == "Wolf":
@@ -49,10 +46,8 @@ while player_hp > 0 and kos_hp > 0:
     if len(round_one_hand) == 0:
         current_hand = round_two_hand
     print("\nAvailable Player Combat Cards:")
-    i = 1
-    for card in current_hand:
-        print(f'{i}: {card}')
-        i += 1
+    for i, card in enumerate(current_hand):
+        print(f'{i+1}: {card}')
 
     selected_card_number = int(input(f'\nPlayer, please select a card [1-{len(current_hand)}]: '))
     print(f'You chose card # {selected_card_number}')
@@ -88,19 +83,12 @@ while player_hp > 0 and kos_hp > 0:
     print(f'\nPlayer HP: {player_hp}')
     print(f'Kos HP: {kos_hp}')
 
-    if len(combat_cards) == 0:
-        break
-
     i += 1
 
-
-
-
-
-
-
-#Player selects card from hand
-#Player selects mod on card, declares it before laying card down
-#Player hits 'enter,' which officially 'submits' their selection, and also rolls the 3 dice for the NPC
-#Program calculates results and deducts HP if necessary.
-#Repeat until someone is defeated (all HP lost)
+print("\n===== GAME OVER =====")
+if player_hp <= 0 and kos_hp > 0:
+    print("\nYou lose. You are injured.")
+if kos_hp <= 0 and player_hp > 0:
+    print("\nYou win! Collect your reward.")
+if player_hp <= 0 and kos_hp <= 0:
+    print("\nDraw. You are evenly matched.")
