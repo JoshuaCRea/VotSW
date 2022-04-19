@@ -31,14 +31,19 @@ def clash(pa, pb, ph, ka, kb, kh):
     return ph, kh
 
 
-combat_cards = get_combat_cards()
-random.shuffle(combat_cards)
+print("====== START ======\n")
 
 player_hp = 5
 kos_hp = 5
-
 print(f'Player HP: {player_hp}')
 print(f'Kos HP: {kos_hp}')
+
+print("\nAvailable Player Combat Cards:")
+combat_cards = get_combat_cards()
+random.shuffle(combat_cards)
+round_one_hand = combat_cards[0:5]
+for card in round_one_hand:
+    print(card)
 
 i = 0
 while player_hp > 0 and kos_hp > 0:

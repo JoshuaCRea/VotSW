@@ -20,6 +20,9 @@ class Combat_Card:
         self.attack = attack
         self.block = block
 
+    def __str__(self):
+        return f'Card - Attack: {self.attack}, Block: {self.block}'
+
 
 def get_combat_cards():
     card1 = Combat_Card("Hi", "Hi")
