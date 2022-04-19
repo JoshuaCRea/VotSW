@@ -41,24 +41,28 @@ print(f'Kos HP: {kos_hp}')
 combat_cards = get_combat_cards()
 random.shuffle(combat_cards)
 round_one_hand = combat_cards[0:5]
+round_two_hand = combat_cards[5:10]
 
 i = 0
 while player_hp > 0 and kos_hp > 0:
+    current_hand = round_one_hand
+    if len(round_one_hand) == 0:
+        current_hand = round_two_hand
     print("\nAvailable Player Combat Cards:")
     i = 1
-    for card in round_one_hand:
+    for card in current_hand:
         print(f'{i}: {card}')
         i += 1
 
-    selected_card_number = int(input(f'\nPlayer, please select a card [1-{len(round_one_hand)}]: '))
+    selected_card_number = int(input(f'\nPlayer, please select a card [1-{len(current_hand)}]: '))
     print(f'You chose card # {selected_card_number}')
     selected_card_index = selected_card_number - 1
-    selected_card = round_one_hand[selected_card_index]
+    selected_card = current_hand[selected_card_index]
     print(f'...which is this card: {selected_card}')
 
     player_atk = selected_card.attack
     player_blk = selected_card.block
-    round_one_hand.pop(selected_card_index)
+    current_hand.pop(selected_card_index)
 
     player_mod = "Normal"
     player_mod_message = get_mod_message(player_mod)
