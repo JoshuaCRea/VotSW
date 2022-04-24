@@ -29,3 +29,11 @@ def get_mod_value():
         return "Star"
     else:
         return "Normal"
+
+
+def get_mod_message(mod_value):
+    if mod_value == "Wolf":
+        return "Defense is reversal."
+    if mod_value == "Star":
+        return "Defense is reversal."
+    return "No modification."
