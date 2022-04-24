@@ -28,6 +28,13 @@ def get_two_hands():
     return round_one_hand, round_two_hand
 
 
+def get_kos_clash_values():
+    kos_atk = get_attack_value()
+    kos_blk = get_blk_value()
+    kos_mod = get_mod_value()
+    return kos_atk, kos_blk, kos_mod
+
+
 print("====== START ======\n")
 
 player_hp = 5
@@ -61,9 +68,6 @@ while player_is_alive and kos_is_alive:
     player_mod = "Normal"
     player_mod_message = get_mod_message(player_mod)
 
-    # kos_atk = get_attack_value()
-    # kos_blk = get_blk_value()
-    # kos_mod = get_mod_value()
     kos_atk, kos_blk, kos_mod = get_kos_clash_values()
     kos_mod_message = get_mod_message(kos_mod)
 
