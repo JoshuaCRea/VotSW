@@ -46,7 +46,9 @@ print(f'Player HP: {player_hp}')
 print(f'Kos HP: {kos_hp}')
 
 i = 0
-while player_hp > 0 and kos_hp > 0:
+player_is_alive = True
+kos_is_alive = True
+while player_is_alive and kos_is_alive:
     current_hand = round_one_hand
     if len(round_one_hand) == 0:
         current_hand = round_two_hand
@@ -67,14 +69,18 @@ while player_hp > 0 and kos_hp > 0:
     player_mod = "Normal"
     player_mod_message = get_mod_message(player_mod)
 
-    kos_atk = get_attack_value()
-    kos_blk = get_blk_value()
-    kos_mod = get_mod_value()
+    # kos_atk = get_attack_value()
+    # kos_blk = get_blk_value()
+    # kos_mod = get_mod_value()
+    kos_atk, kos_blk, kos_mod = get_kos_clash_values()
     kos_mod_message = get_mod_message(kos_mod)
 
     player_hp, kos_hp = clash(player_atk, player_blk, player_hp, kos_atk, kos_blk, kos_hp)
     if player_atk == kos_blk and kos_mod == "Wolf" or kos_mod == "Star":
         player_hp -= 1
+
+    player_is_alive = player_hp > 0
+    kos_is_alive = kos_hp > 0
 
     print(f'\n== CLASH {i} ==')
     print(f'\nPlayer atk: {player_atk}')
