@@ -29,9 +29,9 @@ def get_two_hands():
 
 
 def get_kos_clash_values():
-    kos_atk = get_attack_value()
-    kos_blk = get_blk_value()
-    kos_mod = get_mod_value()
+    kos_atk = get_attack_value(random.randint(1, 6))
+    kos_blk = get_blk_value(random.randint(1, 6))
+    kos_mod = get_mod_value(random.randint(1, 6))
     return kos_atk, kos_blk, kos_mod
 
 
