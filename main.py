@@ -56,10 +56,15 @@ while player_is_alive and kos_is_alive:
         print(f'{card_number + 1}: {card}')
 
     selected_card_number = int(input(f'\nPlayer, please select a card [1-{len(current_hand)}]: '))
-    print(f'You chose card # {selected_card_number}')
-    selected_card_index = selected_card_number - 1
-    selected_card = current_hand[selected_card_index]
-    print(f'...which is this card: {selected_card}')
+
+    if selected_card_number < 1 or selected_card_number > len(current_hand):
+        print(f'Invalid choice. Please choose a number [1-{len(current_hand)}]: ')
+        continue
+    else:
+        print(f'You chose card # {selected_card_number}')
+        selected_card_index = selected_card_number - 1
+        selected_card = current_hand[selected_card_index]
+        print(f'...which is this card: {selected_card}')
 
     player_atk = selected_card.attack
     player_blk = selected_card.block
