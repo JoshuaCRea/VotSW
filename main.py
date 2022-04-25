@@ -94,8 +94,8 @@ while player_is_alive and kos_is_alive:
 
 print("\n===== GAME OVER =====")
 if player_hp <= 0 and kos_hp > 0:
-    print("\nYou lose. You are injured.")
+    print("\nYou lost. Lose one reputation rank, and you are now injured.")
 if kos_hp <= 0 and player_hp > 0:
-    print("\nYou win! Collect your reward.")
+    print("\nYou won! Gain one reputation rank, and collect your reward.")
 if player_hp <= 0 and kos_hp <= 0:
-    print("\nDraw. You are evenly matched.")
+    print("\nIt's a draw. You are evenly matched.")
