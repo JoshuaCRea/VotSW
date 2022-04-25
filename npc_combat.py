@@ -1,31 +1,36 @@
 import random
 
 
-def get_attack_value():
-    atk = random.randint(1, 6)
-    if atk == 1 or atk == 6:
+def get_attack_value(num):
+    if num == 1 or num == 6:
         return "Hi"
-    elif atk == 2 or atk == 5:
+    elif num == 2 or num == 5:
         return "Mid"
-    elif atk == 3 or atk == 4:
+    elif num == 3 or num == 4:
         return "Lo"
 
 
-def get_blk_value():
-    blk = random.randint(1, 6)
-    if blk == 1 or blk == 6:
+def get_blk_value(num):
+    if num == 1 or num == 6:
         return "Hi"
-    elif blk == 2 or blk == 5:
+    elif num == 2 or num == 5:
         return "Mid"
-    elif blk == 3 or blk == 4:
+    elif num == 3 or num == 4:
         return "Lo"
 
 
-def get_mod_value():
-    mod = random.randint(1, 6)
-    if mod == 1:
+def get_mod_value(num):
+    if num == 1:
         return "Wolf"
-    elif mod == 6:
+    elif num == 6:
         return "Star"
     else:
         return "Normal"
+
+
+def get_mod_message(mod_value):
+    if mod_value == "Wolf":
+        return "Defense is reversal."
+    if mod_value == "Star":
+        return "Defense is reversal."
+    return "No modification."

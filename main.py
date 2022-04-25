@@ -1,4 +1,4 @@
-from npc_combat import get_attack_value, get_blk_value, get_mod_value
+from npc_combat import get_attack_value, get_blk_value, get_mod_value, get_mod_message
 from combat_card import get_combat_cards
 import random
 
@@ -12,14 +12,6 @@ import random
 '''
 
 
-def get_mod_message(mod_value):
-    if mod_value == "Wolf":
-        return "Defense is reversal."
-    if mod_value == "Star":
-        return "Defense is reversal."
-    return "No modification."
-
-
 def clash(pa, pb, ph, ka, kb, kh):
     if ka != pb:
         ph -= 1
@@ -28,26 +20,40 @@ def clash(pa, pb, ph, ka, kb, kh):
     return ph, kh
 
 
+def get_two_hands():
+    combat_cards = get_combat_cards()
+    random.shuffle(combat_cards)
+    round_one_hand = combat_cards[0:5]
+    round_two_hand = combat_cards[5:10]
+    return round_one_hand, round_two_hand
+
+
+def get_kos_clash_values():
+    kos_atk = get_attack_value(random.randint(1, 6))
+    kos_blk = get_blk_value(random.randint(1, 6))
+    kos_mod = get_mod_value(random.randint(1, 6))
+    return kos_atk, kos_blk, kos_mod
+
+
 print("====== START ======\n")
 
 player_hp = 5
 kos_hp = 5
+round_one_hand, round_two_hand = get_two_hands()
+
 print(f'Player HP: {player_hp}')
 print(f'Kos HP: {kos_hp}')
 
-combat_cards = get_combat_cards()
-random.shuffle(combat_cards)
-round_one_hand = combat_cards[0:5]
-round_two_hand = combat_cards[5:10]
-
-i = 0
-while player_hp > 0 and kos_hp > 0:
+clash_number = 1
+player_is_alive = True
+kos_is_alive = True
+while player_is_alive and kos_is_alive:
     current_hand = round_one_hand
     if len(round_one_hand) == 0:
         current_hand = round_two_hand
     print("\nAvailable Player Combat Cards:")
-    for i, card in enumerate(current_hand):
-        print(f'{i+1}: {card}')
+    for card_number, card in enumerate(current_hand):
+        print(f'{card_number + 1}: {card}')
 
     selected_card_number = int(input(f'\nPlayer, please select a card [1-{len(current_hand)}]: '))
     print(f'You chose card # {selected_card_number}')
@@ -62,16 +68,17 @@ while player_hp > 0 and kos_hp > 0:
     player_mod = "Normal"
     player_mod_message = get_mod_message(player_mod)
 
-    kos_atk = get_attack_value()
-    kos_blk = get_blk_value()
-    kos_mod = get_mod_value()
+    kos_atk, kos_blk, kos_mod = get_kos_clash_values()
     kos_mod_message = get_mod_message(kos_mod)
 
     player_hp, kos_hp = clash(player_atk, player_blk, player_hp, kos_atk, kos_blk, kos_hp)
     if player_atk == kos_blk and kos_mod == "Wolf" or kos_mod == "Star":
         player_hp -= 1
 
-    print(f'\n== CLASH {i} ==')
+    player_is_alive = player_hp > 0
+    kos_is_alive = kos_hp > 0
+
+    print(f'\n== CLASH {clash_number} ==')
     print(f'\nPlayer atk: {player_atk}')
     print(f'Player blk: {player_blk}')
     print(f'Player mod: {player_mod}')
@@ -83,7 +90,7 @@ while player_hp > 0 and kos_hp > 0:
     print(f'\nPlayer HP: {player_hp}')
     print(f'Kos HP: {kos_hp}')
 
-    i += 1
+    clash_number += 1
 
 print("\n===== GAME OVER =====")
 if player_hp <= 0 and kos_hp > 0:
