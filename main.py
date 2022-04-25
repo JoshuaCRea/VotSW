@@ -55,10 +55,11 @@ while player_is_alive and kos_is_alive:
     for card_number, card in enumerate(current_hand):
         print(f'{card_number + 1}: {card}')
 
-    selected_card_number = int(input(f'\nPlayer, please select a card [1-{len(current_hand)}]: '))
+    cards_remaining_in_hand = len(current_hand)
+    selected_card_number = int(input(f'\nPlayer, please select a card [1-{cards_remaining_in_hand}]: '))
 
-    if selected_card_number < 1 or selected_card_number > len(current_hand):
-        print(f'Invalid choice. Please choose a number [1-{len(current_hand)}]: ')
+    if selected_card_number < 1 or selected_card_number > cards_remaining_in_hand:
+        print(f'Invalid choice. Please choose a number [1-{cards_remaining_in_hand}]: ')
         continue
     else:
         print(f'You chose card # {selected_card_number}')
