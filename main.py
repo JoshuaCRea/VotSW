@@ -104,6 +104,7 @@ while player_is_alive and kos_is_alive:
     print(f'Kos HP: {kos_hp}')
 
     if clash_number == 10:
+        print("\nIt's a draw. You are evenly matched.")
         break
     clash_number += 1
 
