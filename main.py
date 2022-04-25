@@ -44,7 +44,7 @@ round_one_hand, round_two_hand = get_two_hands()
 print(f'Player HP: {player_hp}')
 print(f'Kos HP: {kos_hp}')
 
-i = 0
+clash_number = 1
 player_is_alive = True
 kos_is_alive = True
 while player_is_alive and kos_is_alive:
@@ -52,8 +52,8 @@ while player_is_alive and kos_is_alive:
     if len(round_one_hand) == 0:
         current_hand = round_two_hand
     print("\nAvailable Player Combat Cards:")
-    for i, card in enumerate(current_hand):
-        print(f'{i+1}: {card}')
+    for card_number, card in enumerate(current_hand):
+        print(f'{card_number + 1}: {card}')
 
     selected_card_number = int(input(f'\nPlayer, please select a card [1-{len(current_hand)}]: '))
     print(f'You chose card # {selected_card_number}')
@@ -78,7 +78,7 @@ while player_is_alive and kos_is_alive:
     player_is_alive = player_hp > 0
     kos_is_alive = kos_hp > 0
 
-    print(f'\n== CLASH {i} ==')
+    print(f'\n== CLASH {clash_number} ==')
     print(f'\nPlayer atk: {player_atk}')
     print(f'Player blk: {player_blk}')
     print(f'Player mod: {player_mod}')
@@ -90,7 +90,7 @@ while player_is_alive and kos_is_alive:
     print(f'\nPlayer HP: {player_hp}')
     print(f'Kos HP: {kos_hp}')
 
-    i += 1
+    clash_number += 1
 
 print("\n===== GAME OVER =====")
 if player_hp <= 0 and kos_hp > 0:
