@@ -56,16 +56,23 @@ while player_is_alive and kos_is_alive:
         print(f'{card_number + 1}: {card}')
 
     cards_remaining_in_hand = len(current_hand)
-    selected_card_number = int(input(f'\nPlayer, please select a card [1-{cards_remaining_in_hand}]: '))
+    card_auto_chosen = False
+    if cards_remaining_in_hand == 1:
+        card_auto_chosen = True
+        selected_card_number = 1
+        print(f'Auto-choosing card # {selected_card_number}')
+    else:
+        selected_card_number = int(input(f'\nPlayer, please select a card [1-{cards_remaining_in_hand}]: '))
 
     if selected_card_number < 1 or selected_card_number > cards_remaining_in_hand:
         print(f'Invalid choice. Please choose a number [1-{cards_remaining_in_hand}]: ')
         continue
-    else:
+
+    if card_auto_chosen == False:
         print(f'You chose card # {selected_card_number}')
-        selected_card_index = selected_card_number - 1
-        selected_card = current_hand[selected_card_index]
-        print(f'...which is this card: {selected_card}')
+    selected_card_index = selected_card_number - 1
+    selected_card = current_hand[selected_card_index]
+    print(f'...which is this card: {selected_card}')
 
     player_atk = selected_card.attack
     player_blk = selected_card.block
@@ -96,7 +103,10 @@ while player_is_alive and kos_is_alive:
     print(f'\nPlayer HP: {player_hp}')
     print(f'Kos HP: {kos_hp}')
 
+    if clash_number == 10:
+        break
     clash_number += 1
+
 
 print("\n===== GAME OVER =====")
 if player_hp <= 0 and kos_hp > 0:
