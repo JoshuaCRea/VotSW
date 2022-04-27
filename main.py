@@ -54,16 +54,27 @@ while player_is_alive and kos_is_alive:
     print("\nAvailable Player Combat Cards:")
     for card_number, card in enumerate(current_hand):
         print(f'{card_number + 1}: {card}')
-
     cards_remaining_in_hand = len(current_hand)
     card_auto_chosen = False
+    selected_card_special = None
     if cards_remaining_in_hand == 1:
         card_auto_chosen = True
         selected_card_number = 1
         print(f'Auto-choosing card # {selected_card_number}')
+        print(f'\nCard Specials:')
+        print(f'1. Normal')
+        print(f'2. School Special')
+        print(f'3. Random Special\n')
+        selected_card_special = input(f'Player, please select a Special [1-3]: ')
     else:
         selected_card_number = int(input(f'\nPlayer, please select a card [1-{cards_remaining_in_hand}]: '))
+        print(f'\nCard Specials:')
+        print(f'1. Normal')
+        print(f'2. School Special')
+        print(f'3. Random Special\n')
+        selected_card_special = input(f'Player, please select a Special [1-3]: ')
 
+    print(f'Selected card Special: {selected_card_special}')
     if selected_card_number < 1 or selected_card_number > cards_remaining_in_hand:
         print(f'Invalid choice. Please choose a number [1-{cards_remaining_in_hand}]: ')
         continue
@@ -78,6 +89,7 @@ while player_is_alive and kos_is_alive:
     player_blk = selected_card.block
     current_hand.pop(selected_card_index)
 
+    # implement logic here
     player_mod = "Normal"
     player_mod_message = get_mod_message(player_mod)
 
