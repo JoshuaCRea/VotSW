@@ -89,7 +89,8 @@ while player_is_alive and kos_is_alive:
     player_blk = selected_card.block
     current_hand.pop(selected_card_index)
 
-    # implement logic here
+    # TODO: change mod message based on Player's choice
+    # factor Player mod into combat outcomes
     player_mod = "Normal"
     player_mod_message = get_mod_message(player_mod)
 
