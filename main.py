@@ -85,7 +85,7 @@ while player_is_alive and kos_is_alive:
     kos_mod_message = get_mod_message(kos_mod)
 
     player_hp, kos_hp = clash(player_atk, player_blk, player_hp, kos_atk, kos_blk, kos_hp)
-    if player_atk == kos_blk and kos_mod == "Wolf" or kos_mod == "Star":
+    if player_atk == kos_blk and (kos_mod == "Wolf" or kos_mod == "Star"):
         player_hp -= 1
 
     player_is_alive = player_hp > 0
