@@ -35,6 +35,15 @@ def get_kos_clash_values():
     return kos_atk, kos_blk, kos_mod
 
 
+def get_selected_card_special():
+    print(f'\nCard Specials:')
+    print(f'1. Normal')
+    print(f'2. School Special')
+    print(f'3. Random Special\n')
+    selected_card_special = input(f'Player, please select a Special [1-3]: ')
+    return selected_card_special
+
+
 print("====== START ======\n")
 
 player_hp = 5
@@ -61,18 +70,10 @@ while player_is_alive and kos_is_alive:
         card_auto_chosen = True
         selected_card_number = 1
         print(f'Auto-choosing card # {selected_card_number}')
-        print(f'\nCard Specials:')
-        print(f'1. Normal')
-        print(f'2. School Special')
-        print(f'3. Random Special\n')
-        selected_card_special = input(f'Player, please select a Special [1-3]: ')
+        selected_card_special = get_selected_card_special()
     else:
         selected_card_number = int(input(f'\nPlayer, please select a card [1-{cards_remaining_in_hand}]: '))
-        print(f'\nCard Specials:')
-        print(f'1. Normal')
-        print(f'2. School Special')
-        print(f'3. Random Special\n')
-        selected_card_special = input(f'Player, please select a Special [1-3]: ')
+        selected_card_special = get_selected_card_special()
 
     print(f'Selected card Special: {selected_card_special}')
     if selected_card_number < 1 or selected_card_number > cards_remaining_in_hand:
