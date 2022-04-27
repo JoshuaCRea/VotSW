@@ -73,18 +73,17 @@ while player_is_alive and kos_is_alive:
         selected_card_special = get_selected_card_special()
     else:
         selected_card_number = int(input(f'\nPlayer, please select a card [1-{cards_remaining_in_hand}]: '))
+        if selected_card_number < 1 or selected_card_number > cards_remaining_in_hand:
+            print(f'Invalid choice. Please choose a number [1-{cards_remaining_in_hand}]: ')
+            continue
         selected_card_special = get_selected_card_special()
-
-    print(f'Selected card Special: {selected_card_special}')
-    if selected_card_number < 1 or selected_card_number > cards_remaining_in_hand:
-        print(f'Invalid choice. Please choose a number [1-{cards_remaining_in_hand}]: ')
-        continue
 
     if card_auto_chosen == False:
         print(f'You chose card # {selected_card_number}')
     selected_card_index = selected_card_number - 1
     selected_card = current_hand[selected_card_index]
     print(f'...which is this card: {selected_card}')
+    print(f'Selected card Special: {selected_card_special}')
 
     player_atk = selected_card.attack
     player_blk = selected_card.block
