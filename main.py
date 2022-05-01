@@ -89,7 +89,7 @@ while player_is_alive and kos_is_alive:
         selected_card_special = get_selected_card_special()
     else:
         selected_card_number = get_selected_card(cards_remaining_in_hand)
-        if selected_card_number not in [x for x in range(1, cards_remaining_in_hand)]:
+        if selected_card_number not in [x for x in range(1, cards_remaining_in_hand + 1)]:
             print(f'Invalid choice. Please choose a number [1-{cards_remaining_in_hand}]: ')
             continue
         selected_card_special = get_selected_card_special()
