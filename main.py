@@ -48,6 +48,11 @@ def get_selected_card_special():
     return card_special_options[selected_card_special_num]
 
 
+def get_selected_card(cards_remaining_in_hand):
+    selected_card_number = int(input(f'\nPlayer, please select a card [1-{cards_remaining_in_hand}]: '))
+    return selected_card_number
+
+
 print("====== START ======\n")
 
 player_hp = 5
@@ -69,13 +74,14 @@ while player_is_alive and kos_is_alive:
         print(f'{card_number + 1}: {card}')
     cards_remaining_in_hand = len(current_hand)
     card_auto_chosen = False
+
     if cards_remaining_in_hand == 1:
         card_auto_chosen = True
         selected_card_number = 1
         print(f'Auto-choosing card # {selected_card_number}')
         selected_card_special = get_selected_card_special()
     else:
-        selected_card_number = int(input(f'\nPlayer, please select a card [1-{cards_remaining_in_hand}]: '))
+        selected_card_number = get_selected_card(cards_remaining_in_hand)
         if selected_card_number not in [x for x in range(1, cards_remaining_in_hand)]:
             print(f'Invalid choice. Please choose a number [1-{cards_remaining_in_hand}]: ')
             continue
