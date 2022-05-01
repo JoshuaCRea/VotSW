@@ -53,6 +53,12 @@ def get_selected_card(cards_remaining_in_hand):
     return selected_card_number
 
 
+def get_current_hand(round_one_hand, round_two_hand):
+    if len(round_one_hand) != 0:
+        return round_one_hand
+    return round_two_hand
+
+
 print("====== START ======\n")
 
 player_hp = 5
@@ -66,12 +72,13 @@ clash_number = 1
 player_is_alive = True
 kos_is_alive = True
 while player_is_alive and kos_is_alive:
-    current_hand = round_one_hand
-    if len(round_one_hand) == 0:
-        current_hand = round_two_hand
+    # TODO: we really shouldn't need to determine what the current hand is each iteration
+    # replace this with a Better Way™
+    current_hand = get_current_hand(round_one_hand, round_two_hand)
     print("\nAvailable Player Combat Cards:")
-    for card_number, card in enumerate(current_hand):
-        print(f'{card_number + 1}: {card}')
+    for index, card in enumerate(current_hand):
+        card_number = index + 1
+        print(f'{card_number}: {card}')
     cards_remaining_in_hand = len(current_hand)
     card_auto_chosen = False
 
