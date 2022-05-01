@@ -36,12 +36,16 @@ def get_kos_clash_values():
 
 
 def get_selected_card_special():
+    card_special_options = {
+        1: "Normal",
+        2: "School Special",
+        3: "Random Special"
+    }
     print(f'\nCard Specials:')
-    print(f'1. Normal')
-    print(f'2. School Special')
-    print(f'3. Random Special\n')
-    selected_card_special = input(f'Player, please select a Special [1-3]: ')
-    return selected_card_special
+    for key, value in card_special_options.items():
+        print(f'{key}. {value}')
+    selected_card_special_num = int(input(f'Player, please select a Special [1-{len(card_special_options)}]: '))
+    return card_special_options[selected_card_special_num]
 
 
 print("====== START ======\n")
@@ -89,11 +93,6 @@ while player_is_alive and kos_is_alive:
     player_blk = selected_card.block
     current_hand.pop(selected_card_index)
 
-    # TODO: change mod message based on Player's choice
-    # factor Player mod into combat outcomes
-    player_mod = "Normal"
-    player_mod_message = get_mod_message(player_mod)
-
     kos_atk, kos_blk, kos_mod = get_kos_clash_values()
     kos_mod_message = get_mod_message(kos_mod)
 
@@ -107,8 +106,8 @@ while player_is_alive and kos_is_alive:
     print(f'\n== CLASH {clash_number} ==')
     print(f'\nPlayer atk: {player_atk}')
     print(f'Player blk: {player_blk}')
-    print(f'Player mod: {player_mod}')
-    print(f'Player mod msg: {player_mod_message}')
+    print(f'Player mod: {selected_card_special}')
+    # print(f'Player mod msg: {player_mod_message}') # TODO: don't display this info until we implement it in clashes
     print(f'\nKoS atk: {kos_atk}')
     print(f'KoS blk: {kos_blk}')
     print(f'KoS mod: {kos_mod}')
@@ -116,6 +115,7 @@ while player_is_alive and kos_is_alive:
     print(f'\nPlayer HP: {player_hp}')
     print(f'Kos HP: {kos_hp}')
 
+    # TODO: bug? Either combatant could lose before this, in which case that's not a draw..
     if clash_number == 10:
         print("\nIt's a draw. You are evenly matched.")
         break
