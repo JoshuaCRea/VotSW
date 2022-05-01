@@ -1,4 +1,4 @@
-from npc_combat import get_attack_value, get_blk_value, get_mod_value, get_mod_message
+from npc_combat import get_attack_value, get_blk_value, get_kos_clash_values, get_mod_value, get_mod_message
 
 
 def test_get_attack_value():
@@ -35,3 +35,15 @@ def test_get_mod_message():
     assert get_mod_message("Other") == "No modification."
     assert get_mod_message("Mod Value") == "No modification."
     assert get_mod_message("2sx0d7e#@S53#DS%^)^") == "No modification."
+
+
+def test_get_kos_clash_values():
+    actual = get_kos_clash_values()
+
+    kos_atk = actual[0]
+    kos_blk = actual[1]
+    kos_mod = actual[2]
+
+    assert kos_atk in ['Hi', 'Lo', 'Mid']
+    assert kos_blk in ['Hi', 'Lo', 'Mid']
+    assert kos_mod in ['Wolf', 'Star', 'Normal']

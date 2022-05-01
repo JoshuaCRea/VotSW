@@ -1,4 +1,4 @@
-from npc_combat import get_attack_value, get_blk_value, get_mod_value, get_mod_message
+from npc_combat import get_kos_clash_values, get_mod_message
 import combat_card
 import random
 
@@ -26,13 +26,6 @@ def get_two_hands():
     round_one_hand = combat_cards[0:5]
     round_two_hand = combat_cards[5:10]
     return round_one_hand, round_two_hand
-
-
-def get_kos_clash_values():
-    kos_atk = get_attack_value(random.randint(1, 6))
-    kos_blk = get_blk_value(random.randint(1, 6))
-    kos_mod = get_mod_value(random.randint(1, 6))
-    return kos_atk, kos_blk, kos_mod
 
 
 card_special_options = {

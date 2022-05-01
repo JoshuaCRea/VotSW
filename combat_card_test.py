@@ -23,7 +23,7 @@ def test_get_combat_cards():
 
 def test_get_selected_card(monkeypatch):
     min_remaining_cards_in_hand_where_player_would_be_asked_for_input = 2
-    cards_remaining_in_hand = random.randint(2, sys.maxsize)
+    cards_remaining_in_hand = random.randint(min_remaining_cards_in_hand_where_player_would_be_asked_for_input, sys.maxsize)
     player_choice = random.randint(min_remaining_cards_in_hand_where_player_would_be_asked_for_input, cards_remaining_in_hand)
     monkeypatch.setattr('builtins.input', lambda _: player_choice)
 
