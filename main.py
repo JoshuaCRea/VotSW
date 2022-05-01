@@ -1,5 +1,5 @@
 from npc_combat import get_attack_value, get_blk_value, get_mod_value, get_mod_message
-from combat_card import get_combat_cards
+import combat_card
 import random
 
 
@@ -21,7 +21,7 @@ def clash(pa, pb, ph, ka, kb, kh):
 
 
 def get_two_hands():
-    combat_cards = get_combat_cards()
+    combat_cards = combat_card.get_combat_cards()
     random.shuffle(combat_cards)
     round_one_hand = combat_cards[0:5]
     round_two_hand = combat_cards[5:10]
@@ -35,22 +35,19 @@ def get_kos_clash_values():
     return kos_atk, kos_blk, kos_mod
 
 
-def get_selected_card_special():
-    card_special_options = {
+card_special_options = {
         1: "Normal",
         2: "School Special",
         3: "Random Special"
     }
+
+
+def get_selected_card_special(options):
     print(f'\nCard Specials:')
-    for key, value in card_special_options.items():
+    for key, value in options.items():
         print(f'{key}. {value}')
-    selected_card_special_num = int(input(f'Player, please select a Special [1-{len(card_special_options)}]: '))
-    return card_special_options[selected_card_special_num]
-
-
-def get_selected_card(cards_remaining_in_hand):
-    selected_card_number = int(input(f'\nPlayer, please select a card [1-{cards_remaining_in_hand}]: '))
-    return selected_card_number
+    selected_card_special_num = int(input(f'Player, please select a Special [1-{len(options)}]: '))
+    return options[selected_card_special_num]
 
 
 def get_current_hand(round_one_hand, round_two_hand):
@@ -90,13 +87,13 @@ while player_is_alive and kos_is_alive:
         card_auto_chosen = True
         selected_card_number = 1
         print(f'Auto-choosing card # {selected_card_number}')
-        selected_card_special = get_selected_card_special()
+        selected_card_special = get_selected_card_special(card_special_options)
     else:
-        selected_card_number = get_selected_card(cards_remaining_in_hand)
+        selected_card_number = combat_card.get_selected_card(cards_remaining_in_hand)
         if selected_card_number not in [x for x in range(1, cards_remaining_in_hand + 1)]:
             print(f'Invalid choice. Please choose a number [1-{cards_remaining_in_hand}]: ')
             continue
-        selected_card_special = get_selected_card_special()
+        selected_card_special = get_selected_card_special(card_special_options)
 
     if card_auto_chosen == False:
         print(f'You chose card # {selected_card_number}')

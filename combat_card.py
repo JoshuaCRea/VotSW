@@ -38,3 +38,8 @@ def get_combat_cards():
 
     combat_cards = [card1, card2, card3, card4, card5, card6, card7, card8, card9, card10]
     return combat_cards
+
+
+def get_selected_card(cards_remaining_in_hand):
+    selected_card_number = int(input(f'\nPlayer, please select a card [1-{cards_remaining_in_hand}]: '))
+    return selected_card_number
