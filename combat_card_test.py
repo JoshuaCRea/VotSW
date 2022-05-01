@@ -30,3 +30,9 @@ def test_get_selected_card(monkeypatch):
     actual = combat_card.get_selected_card(cards_remaining_in_hand)
 
     assert actual == player_choice
+
+
+def test_get_player_mod_message():
+    actual = combat_card.get_player_mod_message()
+
+    assert actual == '<!! Player mod messages are not yet implemented. !!>'

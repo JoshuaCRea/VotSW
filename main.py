@@ -56,10 +56,6 @@ def get_current_hand(round_one_hand, round_two_hand):
     return round_two_hand
 
 
-def get_player_mod_message(special):
-    return "<!! Player mod messages are not yet implemented. !!>"
-
-
 print("====== START ======\n")
 
 player_hp = 5
@@ -74,7 +70,7 @@ player_is_alive = True
 kos_is_alive = True
 while player_is_alive and kos_is_alive:
     # TODO: we really shouldn't need to determine what the current hand is each iteration
-    # replace this with a Better Way™
+    # replace this with A Better Way™
     current_hand = get_current_hand(round_one_hand, round_two_hand)
     print("\nAvailable Player Combat Cards:")
     for index, card in enumerate(current_hand):
@@ -99,7 +95,7 @@ while player_is_alive and kos_is_alive:
         print(f'You chose card # {selected_card_number}')
     selected_card_index = selected_card_number - 1
     selected_card = current_hand[selected_card_index]
-    player_mod_message = get_player_mod_message(selected_card_special)
+    player_mod_message = combat_card.get_player_mod_message()
     print(f'...which is this card: {selected_card}')
     print(f'Selected card Special: {selected_card_special}')
 

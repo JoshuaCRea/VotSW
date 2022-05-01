@@ -29,3 +29,7 @@ def get_combat_cards():
 def get_selected_card(cards_remaining_in_hand):
     selected_card_number = int(input(f'\nPlayer, please select a card [1-{cards_remaining_in_hand}]: '))
     return selected_card_number
+
+
+def get_player_mod_message():
+    return "<!! Player mod messages are not yet implemented. !!>"
