@@ -59,6 +59,10 @@ def get_current_hand(round_one_hand, round_two_hand):
     return round_two_hand
 
 
+def get_player_mod_message(special):
+    return "<!! Player mod messages are not yet implemented. !!>"
+
+
 print("====== START ======\n")
 
 player_hp = 5
@@ -98,6 +102,7 @@ while player_is_alive and kos_is_alive:
         print(f'You chose card # {selected_card_number}')
     selected_card_index = selected_card_number - 1
     selected_card = current_hand[selected_card_index]
+    player_mod_message = get_player_mod_message(selected_card_special)
     print(f'...which is this card: {selected_card}')
     print(f'Selected card Special: {selected_card_special}')
 
@@ -118,8 +123,8 @@ while player_is_alive and kos_is_alive:
     print(f'\n== CLASH {clash_number} ==')
     print(f'\nPlayer atk: {player_atk}')
     print(f'Player blk: {player_blk}')
-    print(f'Player mod: {selected_card_special}')
-    # print(f'Player mod msg: {player_mod_message}') # TODO: don't display this info until we implement it in clashes
+    print(f'Player mod: {selected_card_special} <!! Player mod is not yet factored into clashes. !!>')
+    print(f'Player mod msg: {player_mod_message}')
     print(f'\nKoS atk: {kos_atk}')
     print(f'KoS blk: {kos_blk}')
     print(f'KoS mod: {kos_mod}')
