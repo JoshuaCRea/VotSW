@@ -1,22 +1,13 @@
-from npc_combat import get_attack_value, get_blk_value, get_kos_clash_values, get_mod_value, get_mod_message
+from npc_combat import roll_for_clash_value, get_kos_clash_values, get_mod_value, get_mod_message
 
 
-def test_get_attack_value():
-    assert get_attack_value(1) == "Hi"
-    assert get_attack_value(2) == "Mid"
-    assert get_attack_value(3) == "Lo"
-    assert get_attack_value(4) == "Lo"
-    assert get_attack_value(5) == "Mid"
-    assert get_attack_value(6) == "Hi"
-
-
-def test_get_blk_value():
-    assert get_blk_value(1) == "Hi"
-    assert get_blk_value(2) == "Mid"
-    assert get_blk_value(3) == "Lo"
-    assert get_blk_value(4) == "Lo"
-    assert get_blk_value(5) == "Mid"
-    assert get_blk_value(6) == "Hi"
+def test_roll_for_clash_value():
+    assert roll_for_clash_value(1) == "Hi"
+    assert roll_for_clash_value(2) == "Mid"
+    assert roll_for_clash_value(3) == "Lo"
+    assert roll_for_clash_value(4) == "Lo"
+    assert roll_for_clash_value(5) == "Mid"
+    assert roll_for_clash_value(6) == "Hi"
 
 
 def test_get_mod_value():
