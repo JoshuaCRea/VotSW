@@ -1,5 +1,5 @@
-from npc_combat import get_attack_value, get_blk_value, get_mod_value, get_mod_message
-from combat_card import get_combat_cards
+from npc_combat import get_kos_clash_values, get_mod_message
+import combat_card
 import random
 
 
@@ -21,18 +21,32 @@ def clash(pa, pb, ph, ka, kb, kh):
 
 
 def get_two_hands():
-    combat_cards = get_combat_cards()
+    combat_cards = combat_card.get_combat_cards()
     random.shuffle(combat_cards)
     round_one_hand = combat_cards[0:5]
     round_two_hand = combat_cards[5:10]
     return round_one_hand, round_two_hand
 
 
-def get_kos_clash_values():
-    kos_atk = get_attack_value(random.randint(1, 6))
-    kos_blk = get_blk_value(random.randint(1, 6))
-    kos_mod = get_mod_value(random.randint(1, 6))
-    return kos_atk, kos_blk, kos_mod
+card_special_options = {
+        1: "Normal",
+        2: "School Special",
+        3: "Random Special"
+    }
+
+
+def get_selected_card_special(options):
+    print(f'\nCard Specials:')
+    for key, value in options.items():
+        print(f'{key}. {value}')
+    selected_card_special_num = int(input(f'Player, please select a Special [1-{len(options)}]: '))
+    return options[selected_card_special_num]
+
+
+def get_current_hand(round_one_hand, round_two_hand):
+    if len(round_one_hand) != 0:
+        return round_one_hand
+    return round_two_hand
 
 
 print("====== START ======\n")
@@ -48,38 +62,39 @@ clash_number = 1
 player_is_alive = True
 kos_is_alive = True
 while player_is_alive and kos_is_alive:
-    current_hand = round_one_hand
-    if len(round_one_hand) == 0:
-        current_hand = round_two_hand
+    # TODO: we really shouldn't need to determine what the current hand is each iteration
+    # replace this with A Better Way™
+    current_hand = get_current_hand(round_one_hand, round_two_hand)
     print("\nAvailable Player Combat Cards:")
-    for card_number, card in enumerate(current_hand):
-        print(f'{card_number + 1}: {card}')
-
+    for index, card in enumerate(current_hand):
+        card_number = index + 1
+        print(f'{card_number}: {card}')
     cards_remaining_in_hand = len(current_hand)
     card_auto_chosen = False
+
     if cards_remaining_in_hand == 1:
         card_auto_chosen = True
         selected_card_number = 1
         print(f'Auto-choosing card # {selected_card_number}')
+        selected_card_special = get_selected_card_special(card_special_options)
     else:
-        selected_card_number = int(input(f'\nPlayer, please select a card [1-{cards_remaining_in_hand}]: '))
-
-    if selected_card_number < 1 or selected_card_number > cards_remaining_in_hand:
-        print(f'Invalid choice. Please choose a number [1-{cards_remaining_in_hand}]: ')
-        continue
+        selected_card_number = combat_card.get_selected_card(cards_remaining_in_hand)
+        if selected_card_number not in [x for x in range(1, cards_remaining_in_hand + 1)]:
+            print(f'Invalid choice. Please choose a number [1-{cards_remaining_in_hand}]: ')
+            continue
+        selected_card_special = get_selected_card_special(card_special_options)
 
     if card_auto_chosen == False:
         print(f'You chose card # {selected_card_number}')
     selected_card_index = selected_card_number - 1
     selected_card = current_hand[selected_card_index]
+    player_mod_message = combat_card.get_player_mod_message()
     print(f'...which is this card: {selected_card}')
+    print(f'Selected card Special: {selected_card_special}')
 
     player_atk = selected_card.attack
     player_blk = selected_card.block
     current_hand.pop(selected_card_index)
-
-    player_mod = "Normal"
-    player_mod_message = get_mod_message(player_mod)
 
     kos_atk, kos_blk, kos_mod = get_kos_clash_values()
     kos_mod_message = get_mod_message(kos_mod)
@@ -94,7 +109,7 @@ while player_is_alive and kos_is_alive:
     print(f'\n== CLASH {clash_number} ==')
     print(f'\nPlayer atk: {player_atk}')
     print(f'Player blk: {player_blk}')
-    print(f'Player mod: {player_mod}')
+    print(f'Player mod: {selected_card_special} <!! Player mod is not yet factored into clashes. !!>')
     print(f'Player mod msg: {player_mod_message}')
     print(f'\nKoS atk: {kos_atk}')
     print(f'KoS blk: {kos_blk}')
@@ -103,6 +118,7 @@ while player_is_alive and kos_is_alive:
     print(f'\nPlayer HP: {player_hp}')
     print(f'Kos HP: {kos_hp}')
 
+    # TODO: bug? Either combatant could lose before this, in which case that's not a draw..
     if clash_number == 10:
         print("\nIt's a draw. You are evenly matched.")
         break
