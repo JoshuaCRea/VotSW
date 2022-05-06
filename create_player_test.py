@@ -29,3 +29,11 @@ def test_select_town(monkeypatch):
     actual = create_player._select_town()
 
     assert actual == EXPECTED_TOWN_OPTIONS[selected_town_number]
+
+
+def test_get_intro_statement():
+    actual = create_player.get_intro_statement()
+
+    assert actual == "You are a student of kung fu in the Valley of the Star. " +\
+                     "You were born and raised in one of the five towns of the valley. " +\
+                     "They are: Leap-Creek, Blackstone, Firefen, Undervale, and Pouch."
