@@ -8,7 +8,6 @@ INITIAL_CHI = 0
 INITIAL_WIT = 0
 
 
-
 class Player:
     def __init__(self, town):
         self.town = town
