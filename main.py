@@ -58,10 +58,13 @@ round_one_hand, round_two_hand = get_two_hands()
 print(f'Player HP: {player_hp}')
 print(f'Kos HP: {kos_hp}')
 
-clash_number = 1
+clash_number = 0
 player_is_alive = True
 kos_is_alive = True
 while player_is_alive and kos_is_alive:
+    if len(round_two_hand) == 0:
+        print("\nIt's a draw. You are evenly matched.")
+        break
     # TODO: we really shouldn't need to determine what the current hand is each iteration
     # replace this with A Better Way™
     current_hand = get_current_hand(round_one_hand, round_two_hand)
@@ -106,6 +109,7 @@ while player_is_alive and kos_is_alive:
     player_is_alive = player_hp > 0
     kos_is_alive = kos_hp > 0
 
+    clash_number += 1
     print(f'\n== CLASH {clash_number} ==')
     print(f'\nPlayer atk: {player_atk}')
     print(f'Player blk: {player_blk}')
@@ -117,12 +121,6 @@ while player_is_alive and kos_is_alive:
     print(f'Kos mod msg: {kos_mod_message}')
     print(f'\nPlayer HP: {player_hp}')
     print(f'Kos HP: {kos_hp}')
-
-    # TODO: bug? Either combatant could lose before this, in which case that's not a draw..
-    if clash_number == 10:
-        print("\nIt's a draw. You are evenly matched.")
-        break
-    clash_number += 1
 
 
 print("\n===== GAME OVER =====")
