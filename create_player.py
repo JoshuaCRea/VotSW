@@ -10,7 +10,7 @@ TOWN_OPTIONS = {
 }
 
 
-def create_player(town):
+def create_player():
     selected_town = _select_town()
     return player.Player(selected_town)
 

@@ -17,7 +17,7 @@ def test_create_player(monkeypatch):
     selected_town = uuid.uuid4()
     monkeypatch.setattr(create_player, "_select_town", lambda: selected_town)
 
-    actual = create_player.create_player(selected_town)
+    actual = create_player.create_player()
 
     assert actual.town == selected_town
 
