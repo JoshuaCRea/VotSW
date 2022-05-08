@@ -21,6 +21,14 @@ def test_get_combat_cards():
     ]
 
 
+def test_combat_card_string_override():
+    sut = Combat_Card(CombatPosture.HIGH, CombatPosture.LOW)
+
+    actual = str(sut)
+
+    assert actual == "Attack: HIGH, Block: LOW"
+
+
 def test_get_selected_card(monkeypatch):
     min_remaining_cards_in_hand_where_player_would_be_asked_for_input = 2
     cards_remaining_in_hand = random.randint(min_remaining_cards_in_hand_where_player_would_be_asked_for_input, sys.maxsize)
