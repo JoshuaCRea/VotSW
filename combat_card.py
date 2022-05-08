@@ -1,3 +1,6 @@
+from enum import Enum, auto, unique
+
+
 class Combat_Card:
     def __init__(self, attack, block):
         self.attack = attack
@@ -11,18 +14,25 @@ class Combat_Card:
                self.block == other.block
 
 
+@unique
+class CombatPosture(Enum):
+    LOW = auto()
+    MID = auto()
+    HIGH = auto()
+
+
 def get_combat_cards():
     return [
-        Combat_Card("Hi", "Hi"),
-        Combat_Card("Hi", "Mid"),
-        Combat_Card("Hi", "Lo"),
-        Combat_Card("Mid", "Hi"),
-        Combat_Card("Mid", "Mid"),
-        Combat_Card("Mid", "Lo"),
-        Combat_Card("Lo", "Hi"),
-        Combat_Card("Lo", "Mid"),
-        Combat_Card("Lo", "Lo"),
-        Combat_Card("Mid", "Lo")
+        Combat_Card(CombatPosture.HIGH, CombatPosture.HIGH),
+        Combat_Card(CombatPosture.HIGH, CombatPosture.MID),
+        Combat_Card(CombatPosture.HIGH, CombatPosture.LOW),
+        Combat_Card(CombatPosture.MID, CombatPosture.HIGH),
+        Combat_Card(CombatPosture.MID, CombatPosture.MID),
+        Combat_Card(CombatPosture.MID, CombatPosture.LOW),
+        Combat_Card(CombatPosture.LOW, CombatPosture.HIGH),
+        Combat_Card(CombatPosture.LOW, CombatPosture.MID),
+        Combat_Card(CombatPosture.LOW, CombatPosture.LOW),
+        Combat_Card(CombatPosture.MID, CombatPosture.LOW)
     ]
 
 
