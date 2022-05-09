@@ -1,6 +1,8 @@
-from npc_combat import get_kos_clash_values, get_mod_message
-import combat_card
 import random
+
+import combat_card
+from npc_combat import get_kos_clash_values, get_mod_message
+from player import Player
 
 
 '''
@@ -12,12 +14,12 @@ import random
 '''
 
 
-def clash(pa, pb, ph, ka, kb, kh):
+def clash(pa, pb, player, ka, kb, kh):
     if ka != pb:
-        ph -= 1
+        player.receive_damage(1)
     if pa != kb:
         kh -= 1
-    return ph, kh
+    return kh
 
 
 def get_two_hands():
@@ -51,17 +53,16 @@ def get_current_hand(round_one_hand, round_two_hand):
 
 print("====== START ======\n")
 
-player_hp = 5
+player = Player()
 kos_hp = 5
 round_one_hand, round_two_hand = get_two_hands()
 
-print(f'Player HP: {player_hp}')
+print(f'Player HP: {player.hp}')
 print(f'Kos HP: {kos_hp}')
 
 clash_number = 0
-player_is_alive = True
 kos_is_alive = True
-while player_is_alive and kos_is_alive:
+while player.is_alive and kos_is_alive:
     if len(round_two_hand) == 0:
         print("\nIt's a draw. You are evenly matched.")
         break
@@ -102,11 +103,10 @@ while player_is_alive and kos_is_alive:
     kos_atk, kos_blk, kos_mod = get_kos_clash_values()
     kos_mod_message = get_mod_message(kos_mod)
 
-    player_hp, kos_hp = clash(player_atk, player_blk, player_hp, kos_atk, kos_blk, kos_hp)
+    kos_hp = clash(player_atk, player_blk, player, kos_atk, kos_blk, kos_hp)
     if player_atk == kos_blk and (kos_mod == "Wolf" or kos_mod == "Star"):
-        player_hp -= 1
+        player.receive_damage(1)
 
-    player_is_alive = player_hp > 0
     kos_is_alive = kos_hp > 0
 
     clash_number += 1
@@ -119,14 +119,14 @@ while player_is_alive and kos_is_alive:
     print(f'KoS blk: {kos_blk}')
     print(f'KoS mod: {kos_mod}')
     print(f'Kos mod msg: {kos_mod_message}')
-    print(f'\nPlayer HP: {player_hp}')
+    print(f'\nPlayer HP: {player.hp}')
     print(f'Kos HP: {kos_hp}')
 
 
 print("\n===== GAME OVER =====")
-if player_hp <= 0 and kos_hp > 0:
+if not player.is_alive and kos_hp > 0:
     print("\nYou lost. Lose one reputation rank, and you are now injured.")
-if kos_hp <= 0 and player_hp > 0:
+if kos_hp <= 0 and player.is_alive:
     print("\nYou won! Gain one reputation rank, and collect your reward.")
-if player_hp <= 0 and kos_hp <= 0:
+if not player.is_alive and kos_hp <= 0:
     print("\nIt's a draw. You are evenly matched.")
