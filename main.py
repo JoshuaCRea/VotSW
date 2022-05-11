@@ -128,7 +128,7 @@ print("\n===== GAME OVER =====")
 if not player.is_alive:
     if kos_is_alive:
         print("\nYou lost. Lose one reputation rank, and you are now injured.")
-    if not kos_is_alive <= 0:
+    if not kos_is_alive:
         print("\nIt's a draw. You are evenly matched.")
 elif not kos_is_alive:
     print("\nYou won! Gain one reputation rank, and collect your reward.")
