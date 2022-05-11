@@ -48,3 +48,21 @@ def test_get_two_hands():
 
     assert len(actual[1]) == 5
     assert all([isinstance(card, combat_card.Combat_Card) for card in actual[1]])
+
+
+def test_get_current_hand_returns_round_one_hand_if_round_one_hand_not_empty():
+    round_one_hand = [object]
+    round_two_hand = [object]
+
+    actual = combat_card.get_current_hand(round_one_hand, round_two_hand)
+
+    assert actual == round_one_hand
+
+
+def test_get_current_hand_returns_round_two_hand_if_round_one_hand_is_empty():
+    round_one_hand = []
+    round_two_hand = [object]
+
+    actual = combat_card.get_current_hand(round_one_hand, round_two_hand)
+
+    assert actual == round_two_hand

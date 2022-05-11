@@ -37,12 +37,6 @@ def get_selected_card_special(options):
     return options[selected_card_special_num]
 
 
-def get_current_hand(round_one_hand, round_two_hand):
-    if len(round_one_hand) != 0:
-        return round_one_hand
-    return round_two_hand
-
-
 print("====== START ======\n")
 
 player = Player()
@@ -60,7 +54,7 @@ while player.is_alive and kos_is_alive:
         break
     # TODO: we really shouldn't need to determine what the current hand is each iteration
     # replace this with A Better Way™
-    current_hand = get_current_hand(round_one_hand, round_two_hand)
+    current_hand = combat_card.get_current_hand(round_one_hand, round_two_hand)
     print("\nAvailable Player Combat Cards:")
     for index, card in enumerate(current_hand):
         card_number = index + 1

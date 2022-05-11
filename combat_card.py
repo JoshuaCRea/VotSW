@@ -44,3 +44,9 @@ def get_two_hands():
     round_one_hand = combat_cards[0:5]
     round_two_hand = combat_cards[5:10]
     return round_one_hand, round_two_hand
+
+
+def get_current_hand(round_one_hand, round_two_hand):
+    if len(round_one_hand) > 0:
+        return round_one_hand
+    return round_two_hand
