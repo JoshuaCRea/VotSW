@@ -9,17 +9,21 @@ sta = 0
 chi = 0
 wit = 0
 
-towns = [Leap-Creek, Blackstone, Firefen, Undervale, Pouch]
+towns = {
+    1: "Leap-Creek",
+    2: "Blackstone",
+    3: "Firefen",
+    4: "Undervale",
+    5: "Pouch"
+}
 
-print("You are a student of kung fu in the Valley of the Star. You were born and raised in one of the five towns of the valley. They are: Leap-Creek, Blackstone, Pouch, Bloodfen, and Undervale.")
+print("You are a student of kung fu in the Valley of the Star. You were born and raised in one of the five towns of the valley.\n")
 
-def choose_pc(town):
-    town = int(input("Choose a town from this list to be your home: "))
-    for town in enumerate(towns):
-        town_number = towns.index + 1
-        print(f'{town_number}: {town}')
+def choose_player_character():
+    for key, value in towns.items():
+        print(f'{key}. {value}')
+    chosen_town = int(input("Choose a town from this list to be your home: "))
+    return towns[chosen_town]
 
-
-choose_pc(3)
-
-#chosen_origin = input("Choose which town is your home:")
+chosen_town = choose_player_character()
+print(f'You chose {chosen_town}.')
