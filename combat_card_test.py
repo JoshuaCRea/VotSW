@@ -1,6 +1,8 @@
 import random
 import sys
 
+import pytest
+
 import combat_card
 
 
@@ -66,3 +68,17 @@ def test_get_current_hand_returns_round_two_hand_if_round_one_hand_is_empty():
     actual = combat_card.get_current_hand(round_one_hand, round_two_hand)
 
     assert actual == round_two_hand
+
+
+get_selected_card_special_test_data = [
+    (1, "Normal"),
+    (2, "School Special"),
+    (3, "Random Special")
+]
+@pytest.mark.parametrize("player_option, expected", get_selected_card_special_test_data)
+def test_get_selected_card_special(monkeypatch, player_option, expected):
+    monkeypatch.setattr('builtins.input', lambda _: player_option)
+
+    actual = combat_card.get_selected_card_special()
+
+    assert actual == expected

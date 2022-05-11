@@ -14,6 +14,13 @@ class Combat_Card:
                self.block == other.block
 
 
+card_special_options = {
+    1: "Normal",
+    2: "School Special",
+    3: "Random Special"
+}
+
+
 def get_combat_cards():
     return [
         Combat_Card("Hi", "Hi"),
@@ -50,3 +57,8 @@ def get_current_hand(round_one_hand, round_two_hand):
     if len(round_one_hand) > 0:
         return round_one_hand
     return round_two_hand
+
+
+def get_selected_card_special():
+    selected_card_special_num = int(input(f'Player, please select a Special [1-{len(card_special_options)}]: '))
+    return card_special_options[selected_card_special_num]

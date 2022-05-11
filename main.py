@@ -22,19 +22,10 @@ def clash(pa, pb, player, ka, kb, kh):
     return kh
 
 
-card_special_options = {
-        1: "Normal",
-        2: "School Special",
-        3: "Random Special"
-    }
-
-
-def get_selected_card_special(options):
+def print_card_special_options():
     print(f'\nCard Specials:')
-    for key, value in options.items():
+    for key, value in combat_card.card_special_options.items():
         print(f'{key}. {value}')
-    selected_card_special_num = int(input(f'Player, please select a Special [1-{len(options)}]: '))
-    return options[selected_card_special_num]
 
 
 print("====== START ======\n")
@@ -66,13 +57,15 @@ while player.is_alive and kos_is_alive:
         card_auto_chosen = True
         selected_card_number = 1
         print(f'Auto-choosing card # {selected_card_number}')
-        selected_card_special = get_selected_card_special(card_special_options)
+        print_card_special_options()
+        selected_card_special = combat_card.get_selected_card_special()
     else:
         selected_card_number = combat_card.get_selected_card(cards_remaining_in_hand)
         if selected_card_number not in [x for x in range(1, cards_remaining_in_hand + 1)]:
             print(f'Invalid choice. Please choose a number [1-{cards_remaining_in_hand}]: ')
             continue
-        selected_card_special = get_selected_card_special(card_special_options)
+        print_card_special_options()
+        selected_card_special = combat_card.get_selected_card_special()
 
     if card_auto_chosen == False:
         print(f'You chose card # {selected_card_number}')
@@ -107,7 +100,6 @@ while player.is_alive and kos_is_alive:
     print(f'Kos mod msg: {kos_mod_message}')
     print(f'\nPlayer HP: {player.hp}')
     print(f'Kos HP: {kos_hp}')
-
 
 
 print("\n===== GAME OVER =====")
