@@ -36,3 +36,15 @@ def test_get_player_mod_message():
     actual = combat_card.get_player_mod_message()
 
     assert actual == '<!! Player mod messages are not yet implemented. !!>'
+
+
+def test_get_two_hands():
+    actual = combat_card.get_two_hands()
+
+    assert len(actual) == 2
+
+    assert len(actual[0]) == 5
+    assert all([isinstance(card, combat_card.Combat_Card) for card in actual[0]])
+
+    assert len(actual[1]) == 5
+    assert all([isinstance(card, combat_card.Combat_Card) for card in actual[1]])

@@ -1,3 +1,6 @@
+import random
+
+
 class Combat_Card:
     def __init__(self, attack, block):
         self.attack = attack
@@ -33,3 +36,11 @@ def get_selected_card(cards_remaining_in_hand):
 
 def get_player_mod_message():
     return "<!! Player mod messages are not yet implemented. !!>"
+
+
+def get_two_hands():
+    combat_cards = get_combat_cards()
+    random.shuffle(combat_cards)
+    round_one_hand = combat_cards[0:5]
+    round_two_hand = combat_cards[5:10]
+    return round_one_hand, round_two_hand

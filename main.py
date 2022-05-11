@@ -22,14 +22,6 @@ def clash(pa, pb, player, ka, kb, kh):
     return kh
 
 
-def get_two_hands():
-    combat_cards = combat_card.get_combat_cards()
-    random.shuffle(combat_cards)
-    round_one_hand = combat_cards[0:5]
-    round_two_hand = combat_cards[5:10]
-    return round_one_hand, round_two_hand
-
-
 card_special_options = {
         1: "Normal",
         2: "School Special",
@@ -55,7 +47,7 @@ print("====== START ======\n")
 
 player = Player()
 kos_hp = 5
-round_one_hand, round_two_hand = get_two_hands()
+round_one_hand, round_two_hand = combat_card.get_two_hands()
 
 print(f'Player HP: {player.hp}')
 print(f'Kos HP: {kos_hp}')
