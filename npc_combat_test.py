@@ -33,13 +33,13 @@ def test_get_mod_message():
 def test_get_npc_clash_values():
     actual = get_npc_clash_values()
 
-    kos_atk = actual[0]
-    kos_blk = actual[1]
-    kos_mod = actual[2]
+    atk = actual[0]
+    blk = actual[1]
+    mod = actual[2]
 
-    assert kos_atk in ['Hi', 'Lo', 'Mid']
-    assert kos_blk in ['Hi', 'Lo', 'Mid']
-    assert kos_mod in ['Wolf', 'Star', 'Normal']
+    assert atk in ['Hi', 'Lo', 'Mid']
+    assert blk in ['Hi', 'Lo', 'Mid']
+    assert mod in ['Wolf', 'Star', 'Normal']
 
 
 clash_test_data = [
