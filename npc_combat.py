@@ -32,3 +32,10 @@ def get_npc_clash_values():
     blk = roll_for_clash_value(random.randint(1, 6))
     mod = get_mod_value(random.randint(1, 6))
     return atk, blk, mod
+
+
+def clash(player_atk, player_blk, player, npc_atk, npc_blk, npc):
+    if npc_atk != player_blk:
+        player.receive_damage(1)
+    if player_atk != npc_blk:
+        npc.receive_damage(1)

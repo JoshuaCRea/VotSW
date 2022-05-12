@@ -1,4 +1,6 @@
-from npc_combat import roll_for_clash_value, get_npc_clash_values, get_mod_value, get_mod_message
+import pytest
+from npc_combat import roll_for_clash_value, get_npc_clash_values, get_mod_value, get_mod_message, clash
+from player import Player
 
 
 def test_roll_for_clash_value():
@@ -38,3 +40,22 @@ def test_get_npc_clash_values():
     assert kos_atk in ['Hi', 'Lo', 'Mid']
     assert kos_blk in ['Hi', 'Lo', 'Mid']
     assert kos_mod in ['Wolf', 'Star', 'Normal']
+
+
+clash_test_data = [
+    ("LO", "LO", "LO", "LO", 0, 0),
+    ("LO", "HI", "LO", "LO", 1, 0),
+    ("LO", "LO", "LO", "HI", 0, 1),
+    ("LO", "HI", "LO", "HI", 1, 1),
+]
+@pytest.mark.parametrize("player_atk, player_blk, npc_atk, npc_blk, expected_player_damage, expected_npc_damage", clash_test_data)
+def test_clash(player_atk, player_blk, npc_atk, npc_blk, expected_player_damage, expected_npc_damage):
+    player = Player()
+    npc = Player()
+    player_hp_before_clash = player.hp
+    npc_hp_before_clash = npc.hp
+
+    clash(player_atk, player_blk, player, npc_atk, npc_blk, npc)
+
+    assert player_hp_before_clash - player.hp == expected_player_damage
+    assert npc_hp_before_clash - npc.hp == expected_npc_damage

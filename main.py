@@ -1,5 +1,5 @@
 import combat_card
-from npc_combat import get_npc_clash_values, get_mod_message
+from npc_combat import get_npc_clash_values, get_mod_message, clash
 from player import Player
 
 
@@ -10,14 +10,6 @@ from player import Player
 ●  	CALCULATION STEP - Determine what happened in this clash. Subtract applicable HP.
 ●  	ACTIVATION PHASE - This is when you activate technique cards that will be played in the next clash. No more than 1 Technique per player may be played in a single clash.
 '''
-
-
-def clash(player_atk, player_blk, player, npc_atk, npc_blk, npc):
-    if npc_atk != player_blk:
-        player.receive_damage(1)
-    if player_atk != npc_blk:
-        npc.receive_damage(1)
-
 
 def print_card_special_options():
     print(f'\nCard Specials:')
