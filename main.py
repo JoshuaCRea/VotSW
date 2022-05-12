@@ -1,7 +1,5 @@
-import random
-
 import combat_card
-from npc_combat import get_kos_clash_values, get_mod_message
+from npc_combat import get_npc_clash_values, get_mod_message
 from player import Player
 
 
@@ -77,7 +75,7 @@ while player.is_alive and npc.is_alive:
     player_blk = selected_card.block
     current_hand.pop(selected_card_index)
 
-    npc_atk, npc_blk, npc_mod = get_kos_clash_values()
+    npc_atk, npc_blk, npc_mod = get_npc_clash_values()
     npc_mod_message = get_mod_message(npc_mod)
 
     clash(player_atk, player_blk, player, npc_atk, npc_blk, npc)
@@ -96,7 +94,6 @@ while player.is_alive and npc.is_alive:
     print(f'NPC mod msg: {npc_mod_message}')
     print(f'\nPlayer HP: {player.hp}')
     print(f'NPC HP: {npc.hp}')
-
 
 print("\n===== GAME OVER =====")
 if not player.is_alive:

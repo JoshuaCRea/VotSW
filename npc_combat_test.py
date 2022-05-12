@@ -1,4 +1,4 @@
-from npc_combat import roll_for_clash_value, get_kos_clash_values, get_mod_value, get_mod_message
+from npc_combat import roll_for_clash_value, get_npc_clash_values, get_mod_value, get_mod_message
 
 
 def test_roll_for_clash_value():
@@ -28,8 +28,8 @@ def test_get_mod_message():
     assert get_mod_message("2sx0d7e#@S53#DS%^)^") == "No modification."
 
 
-def test_get_kos_clash_values():
-    actual = get_kos_clash_values()
+def test_get_npc_clash_values():
+    actual = get_npc_clash_values()
 
     kos_atk = actual[0]
     kos_blk = actual[1]
