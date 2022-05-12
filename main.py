@@ -14,12 +14,11 @@ from player import Player
 '''
 
 
-def clash(pa, pb, player, ka, kb, kh):
+def clash(pa, pb, player, ka, kb, npc):
     if ka != pb:
         player.receive_damage(1)
     if pa != kb:
-        kh -= 1
-    return kh
+        npc.receive_damage(1)
 
 
 def print_card_special_options():
@@ -31,15 +30,14 @@ def print_card_special_options():
 print("====== START ======\n")
 
 player = Player()
-kos_hp = 5
+npc = Player()
 round_one_hand, round_two_hand = combat_card.get_two_hands()
 
 print(f'Player HP: {player.hp}')
-print(f'Kos HP: {kos_hp}')
+print(f'Kos HP: {npc.hp}')
 
 clash_number = 0
-kos_is_alive = True
-while player.is_alive and kos_is_alive:
+while player.is_alive and npc.is_alive:
     if len(round_two_hand) == 0:
         print("\nIt's a draw. You are evenly matched.")
         break
@@ -82,11 +80,9 @@ while player.is_alive and kos_is_alive:
     kos_atk, kos_blk, kos_mod = get_kos_clash_values()
     kos_mod_message = get_mod_message(kos_mod)
 
-    kos_hp = clash(player_atk, player_blk, player, kos_atk, kos_blk, kos_hp)
+    clash(player_atk, player_blk, player, kos_atk, kos_blk, npc)
     if player_atk == kos_blk and (kos_mod == "Wolf" or kos_mod == "Star"):
         player.receive_damage(1)
-
-    kos_is_alive = kos_hp > 0
 
     clash_number += 1
     print(f'\n== CLASH {clash_number} ==')
@@ -99,14 +95,14 @@ while player.is_alive and kos_is_alive:
     print(f'KoS mod: {kos_mod}')
     print(f'Kos mod msg: {kos_mod_message}')
     print(f'\nPlayer HP: {player.hp}')
-    print(f'Kos HP: {kos_hp}')
+    print(f'Kos HP: {npc.hp}')
 
 
 print("\n===== GAME OVER =====")
 if not player.is_alive:
-    if kos_is_alive:
+    if npc.is_alive:
         print("\nYou lost. Lose one reputation rank, and you are now injured.")
-    if not kos_is_alive:
+    if not npc.is_alive:
         print("\nIt's a draw. You are evenly matched.")
-elif not kos_is_alive:
+elif not npc.is_alive:
     print("\nYou won! Gain one reputation rank, and collect your reward.")
