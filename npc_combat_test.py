@@ -1,3 +1,4 @@
+from uuid import uuid4
 import pytest
 from npc_combat import roll_for_clash_value, get_npc_clash_values, get_mod_value, get_mod_message, clash
 from player import Player
@@ -42,20 +43,40 @@ def test_get_npc_clash_values():
     assert mod in ['Wolf', 'Star', 'Normal']
 
 
-clash_test_data = [
+clash_test_data_atk_blk = [
     ("LO", "LO", "LO", "LO", 0, 0),
     ("LO", "HI", "LO", "LO", 1, 0),
     ("LO", "LO", "LO", "HI", 0, 1),
     ("LO", "HI", "LO", "HI", 1, 1),
 ]
-@pytest.mark.parametrize("player_atk, player_blk, npc_atk, npc_blk, expected_player_damage, expected_npc_damage", clash_test_data)
-def test_clash(player_atk, player_blk, npc_atk, npc_blk, expected_player_damage, expected_npc_damage):
+@pytest.mark.parametrize("player_atk, player_blk, npc_atk, npc_blk, expected_player_damage, expected_npc_damage", clash_test_data_atk_blk)
+def test_clash_atk_blk(player_atk, player_blk, npc_atk, npc_blk, expected_player_damage, expected_npc_damage):
     player = Player()
     npc = Player()
     player_hp_before_clash = player.hp
     npc_hp_before_clash = npc.hp
+    npc_mod = uuid4()
 
-    clash(player_atk, player_blk, player, npc_atk, npc_blk, npc)
+    clash(player_atk, player_blk, player, npc_atk, npc_blk, npc_mod, npc)
 
     assert player_hp_before_clash - player.hp == expected_player_damage
     assert npc_hp_before_clash - npc.hp == expected_npc_damage
+
+
+clash_test_data_npc_mod = [
+    ("LO", "LO", "Wolf", 1),
+    ("LO", "LO", "Star", 1),
+    ("LO", "HI", "Wolf", 0),
+    ("LO", "HI", "Star", 0),
+    ("LO", "LO", uuid4(), 0),
+    ("LO", "HI", uuid4(), 0),
+]
+@pytest.mark.parametrize("player_atk, npc_blk, npc_mod, expected_player_damage", clash_test_data_npc_mod)
+def test_clash_npc_mod(player_atk, npc_blk, npc_mod, expected_player_damage):
+    player = Player()
+    npc = Player()
+    player_hp_before_clash = player.hp
+
+    clash(player_atk, "LO", player, "LO", npc_blk, npc_mod, npc)
+
+    assert player_hp_before_clash - player.hp == expected_player_damage

@@ -70,9 +70,7 @@ while player.is_alive and npc.is_alive:
     npc_atk, npc_blk, npc_mod = get_npc_clash_values()
     npc_mod_message = get_mod_message(npc_mod)
 
-    clash(player_atk, player_blk, player, npc_atk, npc_blk, npc)
-    if player_atk == npc_blk and (npc_mod == "Wolf" or npc_mod == "Star"):
-        player.receive_damage(1)
+    clash(player_atk, player_blk, player, npc_atk, npc_blk, npc_mod, npc)
 
     clash_number += 1
     print(f'\n== CLASH {clash_number} ==')
