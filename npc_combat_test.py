@@ -64,15 +64,15 @@ def test_clash_atk_blk(player_atk, player_blk, npc_atk, npc_blk, expected_player
 
 
 clash_test_data_npc_mod = [
-    ("LO", "LO", "Wolf", 1),
-    ("LO", "LO", "Star", 1),
-    ("LO", "HI", "Wolf", 0),
-    ("LO", "HI", "Star", 0),
-    ("LO", "LO", uuid4(), 0),
-    ("LO", "HI", uuid4(), 0),
+    ("Wolf", "LO", "LO", 1),
+    ("Wolf", "LO", "HI", 0),
+    ("Star", "LO", "LO", 1),
+    ("Star", "LO", "HI", 0),
+    (uuid4(), "LO", "LO", 0),
+    (uuid4(), "LO", "HI", 0),
 ]
-@pytest.mark.parametrize("player_atk, npc_blk, npc_mod, expected_player_damage", clash_test_data_npc_mod)
-def test_clash_npc_mod(player_atk, npc_blk, npc_mod, expected_player_damage):
+@pytest.mark.parametrize("npc_mod, player_atk, npc_blk, expected_player_damage", clash_test_data_npc_mod)
+def test_clash_npc_mod(npc_mod, player_atk, npc_blk, expected_player_damage):
     player = Player()
     npc = Player()
     player_hp_before_clash = player.hp
