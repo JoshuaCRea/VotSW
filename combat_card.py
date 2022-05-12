@@ -1,3 +1,6 @@
+import random
+
+
 class Combat_Card:
     def __init__(self, attack, block):
         self.attack = attack
@@ -9,6 +12,13 @@ class Combat_Card:
     def __eq__(self, other):
         return self.attack == other.attack and \
                self.block == other.block
+
+
+card_special_options = {
+    1: "Normal",
+    2: "School Special",
+    3: "Random Special"
+}
 
 
 def get_combat_cards():
@@ -33,3 +43,22 @@ def get_selected_card(cards_remaining_in_hand):
 
 def get_player_mod_message():
     return "<!! Player mod messages are not yet implemented. !!>"
+
+
+def get_two_hands():
+    combat_cards = get_combat_cards()
+    random.shuffle(combat_cards)
+    round_one_hand = combat_cards[0:5]
+    round_two_hand = combat_cards[5:10]
+    return round_one_hand, round_two_hand
+
+
+def get_current_hand(round_one_hand, round_two_hand):
+    if len(round_one_hand) > 0:
+        return round_one_hand
+    return round_two_hand
+
+
+def get_selected_card_special():
+    selected_card_special_num = int(input(f'Player, please select a Special [1-{len(card_special_options)}]: '))
+    return card_special_options[selected_card_special_num]

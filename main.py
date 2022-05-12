@@ -22,40 +22,17 @@ def clash(pa, pb, player, ka, kb, kh):
     return kh
 
 
-def get_two_hands():
-    combat_cards = combat_card.get_combat_cards()
-    random.shuffle(combat_cards)
-    round_one_hand = combat_cards[0:5]
-    round_two_hand = combat_cards[5:10]
-    return round_one_hand, round_two_hand
-
-
-card_special_options = {
-        1: "Normal",
-        2: "School Special",
-        3: "Random Special"
-    }
-
-
-def get_selected_card_special(options):
+def print_card_special_options():
     print(f'\nCard Specials:')
-    for key, value in options.items():
+    for key, value in combat_card.card_special_options.items():
         print(f'{key}. {value}')
-    selected_card_special_num = int(input(f'Player, please select a Special [1-{len(options)}]: '))
-    return options[selected_card_special_num]
-
-
-def get_current_hand(round_one_hand, round_two_hand):
-    if len(round_one_hand) != 0:
-        return round_one_hand
-    return round_two_hand
 
 
 print("====== START ======\n")
 
 player = Player()
 kos_hp = 5
-round_one_hand, round_two_hand = get_two_hands()
+round_one_hand, round_two_hand = combat_card.get_two_hands()
 
 print(f'Player HP: {player.hp}')
 print(f'Kos HP: {kos_hp}')
@@ -68,7 +45,7 @@ while player.is_alive and kos_is_alive:
         break
     # TODO: we really shouldn't need to determine what the current hand is each iteration
     # replace this with A Better Way™
-    current_hand = get_current_hand(round_one_hand, round_two_hand)
+    current_hand = combat_card.get_current_hand(round_one_hand, round_two_hand)
     print("\nAvailable Player Combat Cards:")
     for index, card in enumerate(current_hand):
         card_number = index + 1
@@ -80,13 +57,15 @@ while player.is_alive and kos_is_alive:
         card_auto_chosen = True
         selected_card_number = 1
         print(f'Auto-choosing card # {selected_card_number}')
-        selected_card_special = get_selected_card_special(card_special_options)
+        print_card_special_options()
+        selected_card_special = combat_card.get_selected_card_special()
     else:
         selected_card_number = combat_card.get_selected_card(cards_remaining_in_hand)
         if selected_card_number not in [x for x in range(1, cards_remaining_in_hand + 1)]:
             print(f'Invalid choice. Please choose a number [1-{cards_remaining_in_hand}]: ')
             continue
-        selected_card_special = get_selected_card_special(card_special_options)
+        print_card_special_options()
+        selected_card_special = combat_card.get_selected_card_special()
 
     if card_auto_chosen == False:
         print(f'You chose card # {selected_card_number}')
@@ -121,7 +100,6 @@ while player.is_alive and kos_is_alive:
     print(f'Kos mod msg: {kos_mod_message}')
     print(f'\nPlayer HP: {player.hp}')
     print(f'Kos HP: {kos_hp}')
-
 
 
 print("\n===== GAME OVER =====")
