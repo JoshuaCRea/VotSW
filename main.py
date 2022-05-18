@@ -88,7 +88,7 @@ while player.is_alive and npc.is_alive:
 print("\n===== GAME OVER =====")
 if not player.is_alive:
     if npc.is_alive:
-        print("\nYou lost. Lose one reputation rank, and you are now injured.")
+        print("\nYou are injured, and you have lost one rank in reputation.")
     if not npc.is_alive:
         print("\nIt's a draw. You are evenly matched.")
 elif not npc.is_alive:
