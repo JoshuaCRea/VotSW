@@ -1,9 +1,9 @@
 import random
 
-from player import Character
+from character import Character
 
 
-def test_player_initial_attributes():
+def test_character_initial_attributes():
     sut = Character()
 
     assert sut.hp == 5

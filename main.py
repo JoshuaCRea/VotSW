@@ -1,6 +1,6 @@
 import combat_card
 from npc_combat import get_npc_clash_values, get_mod_message, clash
-from player import Character
+from character import Character
 
 
 '''

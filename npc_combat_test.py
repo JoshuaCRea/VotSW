@@ -1,7 +1,7 @@
 from uuid import uuid4
 import pytest
 from npc_combat import roll_for_clash_value, get_npc_clash_values, get_mod_value, get_mod_message, clash
-from player import Character
+from character import Character
 
 
 def test_roll_for_clash_value():
