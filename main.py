@@ -1,8 +1,6 @@
-import random
-
 import combat_card
-from npc_combat import get_kos_clash_values, get_mod_message
-from player import Player
+from npc_combat import get_npc_clash_values, get_mod_message, clash
+from character import Character
 
 
 '''
@@ -13,15 +11,6 @@ from player import Player
 ●  	ACTIVATION PHASE - This is when you activate technique cards that will be played in the next clash. No more than 1 Technique per player may be played in a single clash.
 '''
 
-
-def clash(pa, pb, player, ka, kb, kh):
-    if ka != pb:
-        player.receive_damage(1)
-    if pa != kb:
-        kh -= 1
-    return kh
-
-
 def print_card_special_options():
     print(f'\nCard Specials:')
     for key, value in combat_card.card_special_options.items():
@@ -30,16 +19,15 @@ def print_card_special_options():
 
 print("====== START ======\n")
 
-player = Player()
-kos_hp = 5
+player = Character()
+npc = Character()
 round_one_hand, round_two_hand = combat_card.get_two_hands()
 
 print(f'Player HP: {player.hp}')
-print(f'Kos HP: {kos_hp}')
+print(f'NPC HP: {npc.hp}')
 
 clash_number = 0
-kos_is_alive = True
-while player.is_alive and kos_is_alive:
+while player.is_alive and npc.is_alive:
     if len(round_two_hand) == 0:
         print("\nIt's a draw. You are evenly matched.")
         break
@@ -67,7 +55,7 @@ while player.is_alive and kos_is_alive:
         print_card_special_options()
         selected_card_special = combat_card.get_selected_card_special()
 
-    if card_auto_chosen == False:
+    if not card_auto_chosen:
         print(f'You chose card # {selected_card_number}')
     selected_card_index = selected_card_number - 1
     selected_card = current_hand[selected_card_index]
@@ -79,14 +67,10 @@ while player.is_alive and kos_is_alive:
     player_blk = selected_card.block
     current_hand.pop(selected_card_index)
 
-    kos_atk, kos_blk, kos_mod = get_kos_clash_values()
-    kos_mod_message = get_mod_message(kos_mod)
+    npc_atk, npc_blk, npc_mod = get_npc_clash_values()
+    npc_mod_message = get_mod_message(npc_mod)
 
-    kos_hp = clash(player_atk, player_blk, player, kos_atk, kos_blk, kos_hp)
-    if player_atk == kos_blk and (kos_mod == "Wolf" or kos_mod == "Star"):
-        player.receive_damage(1)
-
-    kos_is_alive = kos_hp > 0
+    clash(player_atk, player_blk, player, npc_atk, npc_blk, npc_mod, npc)
 
     clash_number += 1
     print(f'\n== CLASH {clash_number} ==')
@@ -94,19 +78,18 @@ while player.is_alive and kos_is_alive:
     print(f'Player blk: {player_blk}')
     print(f'Player mod: {selected_card_special} <!! Player mod is not yet factored into clashes. !!>')
     print(f'Player mod msg: {player_mod_message}')
-    print(f'\nKoS atk: {kos_atk}')
-    print(f'KoS blk: {kos_blk}')
-    print(f'KoS mod: {kos_mod}')
-    print(f'Kos mod msg: {kos_mod_message}')
+    print(f'\nNPC atk: {npc_atk}')
+    print(f'NPC blk: {npc_blk}')
+    print(f'NPC mod: {npc_mod}')
+    print(f'NPC mod msg: {npc_mod_message}')
     print(f'\nPlayer HP: {player.hp}')
-    print(f'Kos HP: {kos_hp}')
-
+    print(f'NPC HP: {npc.hp}')
 
 print("\n===== GAME OVER =====")
 if not player.is_alive:
-    if kos_is_alive:
-        print("\nYou lost. Lose one reputation rank, and you are now injured.")
-    if not kos_is_alive:
+    if npc.is_alive:
+        print("\nYou are injured, and you have lost one rank in reputation.")
+    if not npc.is_alive:
         print("\nIt's a draw. You are evenly matched.")
-elif not kos_is_alive:
+elif not npc.is_alive:
     print("\nYou won! Gain one reputation rank, and collect your reward.")

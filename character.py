@@ -1,4 +1,4 @@
-class Player:
+class Character:
     def __init__(self):
         self.hp = 5
         self.is_alive = True

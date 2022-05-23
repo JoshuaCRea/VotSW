@@ -27,8 +27,17 @@ def get_mod_message(mod_value):
     return "No modification."
 
 
-def get_kos_clash_values():
-    kos_atk = roll_for_clash_value(random.randint(1, 6))
-    kos_blk = roll_for_clash_value(random.randint(1, 6))
-    kos_mod = get_mod_value(random.randint(1, 6))
-    return kos_atk, kos_blk, kos_mod
+def get_npc_clash_values():
+    atk = roll_for_clash_value(random.randint(1, 6))
+    blk = roll_for_clash_value(random.randint(1, 6))
+    mod = get_mod_value(random.randint(1, 6))
+    return atk, blk, mod
+
+
+def clash(player_atk, player_blk, player, npc_atk, npc_blk, npc_mod, npc):
+    if npc_atk != player_blk:
+        player.receive_damage(1)
+    if player_atk != npc_blk:
+        npc.receive_damage(1)
+    if player_atk == npc_blk and (npc_mod == "Wolf" or npc_mod == "Star"):
+        player.receive_damage(1)
