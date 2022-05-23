@@ -82,11 +82,18 @@ def test_clash_npc_mod(npc_mod, player_atk, npc_blk, expected_player_damage):
     assert player_hp_before_clash - player.hp == expected_player_damage
 
 
-def test_clash_player_mod():
+clash_test_data_player_mod = [
+    ("Reversal", "LO", "LO", 1),
+    ("Reversal", "LO", "HI", 0),
+    (uuid4(), "LO", "LO", 0),
+    (uuid4(), "LO", "HI", 0),
+]
+@pytest.mark.parametrize("player_mod, player_blk, npc_atk, expected_npc_damage", clash_test_data_player_mod)
+def test_clash_player_mod(player_mod, player_blk, npc_atk, expected_npc_damage):
     player = Character()
     npc = Character()
     npc_hp_before_clash = npc.hp
 
-    clash("foo1", "HI", "Reversal", player, "HI", "foo1", "foo3", npc)
+    clash("HI", player_blk, player_mod, player, npc_atk, "HI", uuid4(), npc)
 
-    assert npc.hp == npc_hp_before_clash - 1
+    assert npc.hp == npc_hp_before_clash - expected_npc_damage
