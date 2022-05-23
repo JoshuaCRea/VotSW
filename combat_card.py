@@ -40,10 +40,6 @@ def get_selected_card(cards_remaining_in_hand):
     return selected_card_number
 
 
-def get_player_mod_message():
-    return "<!! Player mod messages are not yet implemented. !!>"
-
-
 def get_two_hands():
     combat_cards = get_combat_cards()
     random.shuffle(combat_cards)
