@@ -72,7 +72,7 @@ def test_get_current_hand_returns_round_two_hand_if_round_one_hand_is_empty():
 
 get_selected_card_special_test_data = [
     (1, "Normal"),
-    (2, "School Special"),
+    (2, "Reversal"),
 ]
 @pytest.mark.parametrize("player_option, expected", get_selected_card_special_test_data)
 def test_get_selected_card_special(monkeypatch, player_option, expected):
