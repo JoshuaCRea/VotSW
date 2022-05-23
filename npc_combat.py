@@ -41,5 +41,5 @@ def clash(player_atk, player_blk, player_mod, player, npc_atk, npc_blk, npc_mod,
         npc.receive_damage(1)
     if player_atk == npc_blk and (npc_mod == "Wolf" or npc_mod == "Star"):
         player.receive_damage(1)
-    if npc_blk == player_atk and player_mod == "Reversal":
+    if npc_atk == player_blk and player_mod == "Reversal":
         npc.receive_damage(1)
