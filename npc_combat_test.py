@@ -1,7 +1,7 @@
 from uuid import uuid4
 import pytest
 from npc_combat import roll_for_clash_value, get_npc_clash_values, get_mod_value, get_mod_message, clash
-from player import Player
+from player import Character
 
 
 def test_roll_for_clash_value():
@@ -51,8 +51,8 @@ clash_test_data_atk_blk = [
 ]
 @pytest.mark.parametrize("player_atk, player_blk, npc_atk, npc_blk, expected_player_damage, expected_npc_damage", clash_test_data_atk_blk)
 def test_clash_atk_blk(player_atk, player_blk, npc_atk, npc_blk, expected_player_damage, expected_npc_damage):
-    player = Player()
-    npc = Player()
+    player = Character()
+    npc = Character()
     player_hp_before_clash = player.hp
     npc_hp_before_clash = npc.hp
     npc_mod = uuid4()
@@ -73,8 +73,8 @@ clash_test_data_npc_mod = [
 ]
 @pytest.mark.parametrize("npc_mod, player_atk, npc_blk, expected_player_damage", clash_test_data_npc_mod)
 def test_clash_npc_mod(npc_mod, player_atk, npc_blk, expected_player_damage):
-    player = Player()
-    npc = Player()
+    player = Character()
+    npc = Character()
     player_hp_before_clash = player.hp
 
     clash(player_atk, "LO", player, "LO", npc_blk, npc_mod, npc)

@@ -1,17 +1,17 @@
 import random
 
-from player import Player
+from player import Character
 
 
 def test_player_initial_attributes():
-    sut = Player()
+    sut = Character()
 
     assert sut.hp == 5
     assert sut.is_alive == True
 
 
 def test_receive_damage_reduces_hp_by_damage_points():
-    sut = Player()
+    sut = Character()
     initial_hp = sut.hp
     damage_points = random.randint(1, initial_hp)
 
@@ -22,7 +22,7 @@ def test_receive_damage_reduces_hp_by_damage_points():
 
 
 def test_reducing_hp_to_zero_sets_is_alive_to_false():
-    sut = Player()
+    sut = Character()
     initial_hp = sut.hp
 
     sut.receive_damage(initial_hp)
@@ -32,7 +32,7 @@ def test_reducing_hp_to_zero_sets_is_alive_to_false():
 
 
 def test_reducing_hp_below_zero_sets_is_alive_to_false():
-    sut = Player()
+    sut = Character()
     initial_hp = sut.hp
 
     sut.receive_damage(initial_hp + 1)

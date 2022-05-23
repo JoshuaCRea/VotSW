@@ -1,6 +1,6 @@
 import combat_card
 from npc_combat import get_npc_clash_values, get_mod_message, clash
-from player import Player
+from player import Character
 
 
 '''
@@ -19,8 +19,8 @@ def print_card_special_options():
 
 print("====== START ======\n")
 
-player = Player()
-npc = Player()
+player = Character()
+npc = Character()
 round_one_hand, round_two_hand = combat_card.get_two_hands()
 
 print(f'Player HP: {player.hp}')
