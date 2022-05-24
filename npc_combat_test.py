@@ -57,7 +57,7 @@ def test_clash_atk_blk(player_atk, player_blk, npc_atk, npc_blk, expected_player
     npc_hp_before_clash = npc.hp
     npc_mod = uuid4()
 
-    clash(player_atk, player_blk, "foo", player, npc_atk, npc_blk, npc_mod, npc)
+    clash(player_atk, player_blk, uuid4(), player, npc_atk, npc_blk, npc_mod, npc)
 
     assert player_hp_before_clash - player.hp == expected_player_damage
     assert npc_hp_before_clash - npc.hp == expected_npc_damage
@@ -77,9 +77,9 @@ def test_clash_npc_mod(npc_mod, player_atk, npc_blk, expected_player_damage):
     npc = Character()
     player_hp_before_clash = player.hp
 
-    clash(player_atk, "LO", "foo", player, "LO", npc_blk, npc_mod, npc)
+    clash(player_atk, "LO", uuid4(), player, "LO", npc_blk, npc_mod, npc)
 
-    assert player_hp_before_clash - player.hp == expected_player_damage
+    assert player.hp == player_hp_before_clash - expected_player_damage
 
 
 clash_test_data_player_mod = [
