@@ -27,7 +27,7 @@ print(f'Player HP: {player.hp}')
 print(f'NPC HP: {npc.hp}')
 
 clash_number = 0
-while player.is_alive and npc.is_alive:
+while player.standing and npc.standing:
     if len(round_two_hand) == 0:
         print("\nIt's a draw. You are evenly matched.")
         break
@@ -84,10 +84,10 @@ while player.is_alive and npc.is_alive:
     print(f'NPC HP: {npc.hp}')
 
 print("\n===== GAME OVER =====")
-if not player.is_alive:
-    if npc.is_alive:
+if not player.standing:
+    if npc.standing:
         print("\nYou are injured, and you have lost one rank in reputation.")
-    if not npc.is_alive:
+    if not npc.standing:
         print("\nIt's a draw. You are evenly matched.")
-elif not npc.is_alive:
+elif not npc.standing:
     print("\nYou won! Gain one reputation rank, and collect your reward.")
