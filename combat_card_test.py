@@ -34,12 +34,6 @@ def test_get_selected_card(monkeypatch):
     assert actual == player_choice
 
 
-def test_get_player_mod_message():
-    actual = combat_card.get_player_mod_message()
-
-    assert actual == '<!! Player mod messages are not yet implemented. !!>'
-
-
 def test_get_two_hands():
     actual = combat_card.get_two_hands()
 
@@ -72,8 +66,7 @@ def test_get_current_hand_returns_round_two_hand_if_round_one_hand_is_empty():
 
 get_selected_card_special_test_data = [
     (1, "Normal"),
-    (2, "School Special"),
-    (3, "Random Special")
+    (2, "Reversal"),
 ]
 @pytest.mark.parametrize("player_option, expected", get_selected_card_special_test_data)
 def test_get_selected_card_special(monkeypatch, player_option, expected):

@@ -59,7 +59,6 @@ while player.is_alive and npc.is_alive:
         print(f'You chose card # {selected_card_number}')
     selected_card_index = selected_card_number - 1
     selected_card = current_hand[selected_card_index]
-    player_mod_message = combat_card.get_player_mod_message()
     print(f'...which is this card: {selected_card}')
     print(f'Selected card Special: {selected_card_special}')
 
@@ -70,14 +69,13 @@ while player.is_alive and npc.is_alive:
     npc_atk, npc_blk, npc_mod = get_npc_clash_values()
     npc_mod_message = get_mod_message(npc_mod)
 
-    clash(player_atk, player_blk, player, npc_atk, npc_blk, npc_mod, npc)
+    clash(player_atk, player_blk, selected_card_special, player, npc_atk, npc_blk, npc_mod, npc)
 
     clash_number += 1
     print(f'\n== CLASH {clash_number} ==')
     print(f'\nPlayer atk: {player_atk}')
     print(f'Player blk: {player_blk}')
-    print(f'Player mod: {selected_card_special} <!! Player mod is not yet factored into clashes. !!>')
-    print(f'Player mod msg: {player_mod_message}')
+    print(f'Player mod: {selected_card_special}')
     print(f'\nNPC atk: {npc_atk}')
     print(f'NPC blk: {npc_blk}')
     print(f'NPC mod: {npc_mod}')
