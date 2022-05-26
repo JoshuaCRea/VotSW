@@ -7,8 +7,9 @@ def test_character_initial_attributes():
     sut = Character()
 
     assert sut.hp == 5
-    assert sut.is_alive == True
+    assert sut.standing == True
     assert sut.rep_rank == 3
+    assert sut.injured == False
 
 
 def test_receive_damage_reduces_hp_by_damage_points():
