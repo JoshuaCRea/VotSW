@@ -100,10 +100,18 @@ def test_clash_player_mod_reversal(player_mod, player_blk, npc_atk, expected_npc
 
 
 clash_test_data_player_mod_overwhelm = [
-    ("HI", "LO", 0),
+    ("Lo", "Lo"),
+    ("Lo", "Mid"),
+    ("Lo", "Hi"),
+    ("Mid", "Lo"),
+    ("Mid", "Mid"),
+    ("Mid", "Hi"),
+    ("Hi", "Lo"),
+    ("Hi", "Mid"),
+    ("Hi", "Hi"),
 ]
-@pytest.mark.parametrize("player_blk, npc_atk, expected_player_damage", clash_test_data_player_mod_overwhelm)
-def test_clash_player_mod_overwhelm(player_blk, npc_atk, expected_player_damage):
+@pytest.mark.parametrize("player_blk, npc_atk", clash_test_data_player_mod_overwhelm)
+def test_clash_player_mod_overwhelm(player_blk, npc_atk):
     player = Character()
     npc = Character()
     player_hp_before_clash = player.hp
@@ -111,5 +119,5 @@ def test_clash_player_mod_overwhelm(player_blk, npc_atk, expected_player_damage)
     clash("HI", player_blk, "Overwhelm", player, npc_atk, "LO", uuid4(), npc)
 
     actual = player.hp
-    expected = player_hp_before_clash - expected_player_damage
+    expected = player_hp_before_clash
     assert actual == expected
