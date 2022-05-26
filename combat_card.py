@@ -17,6 +17,7 @@ class Combat_Card:
 card_special_options = {
     1: "Normal",
     2: "Reversal",
+    3: "Overwhelm"
 }
 
 

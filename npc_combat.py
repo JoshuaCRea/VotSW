@@ -34,17 +34,17 @@ def get_npc_clash_values():
     return atk, blk, mod
 
 
-
-
 def clash(player_atk, player_blk, player_mod, player, npc_atk, npc_blk, npc_mod, npc):
     player_hits_npc = player_atk != npc_blk
     npc_hits_player = npc_atk != player_blk
+
     if npc_hits_player:
-        player.receive_damage(1)
+        if player_mod != "Overwhelm":
+            player.receive_damage(1)
     elif player_mod == "Reversal":
         npc.receive_damage(1)
+    
     if player_hits_npc:
         npc.receive_damage(1)
     elif npc_mod == "Wolf" or npc_mod == "Star":
-        player.receive_damage(1)
-    
+        player.receive_damage(1)    

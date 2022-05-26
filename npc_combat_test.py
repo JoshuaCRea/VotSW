@@ -82,14 +82,14 @@ def test_clash_npc_mod(npc_mod, player_atk, npc_blk, expected_player_damage):
     assert player.hp == player_hp_before_clash - expected_player_damage
 
 
-clash_test_data_player_mod = [
+clash_test_data_player_mod_reversal = [
     ("Reversal", "LO", "LO", 1),
     ("Reversal", "LO", "HI", 0),
-    (uuid4(), "LO", "LO", 0),
+    (uuid4(), "LO", "LO", 0), # TODO: consider removing this once tests for other specials are written
     (uuid4(), "LO", "HI", 0),
 ]
-@pytest.mark.parametrize("player_mod, player_blk, npc_atk, expected_npc_damage", clash_test_data_player_mod)
-def test_clash_player_mod(player_mod, player_blk, npc_atk, expected_npc_damage):
+@pytest.mark.parametrize("player_mod, player_blk, npc_atk, expected_npc_damage", clash_test_data_player_mod_reversal)
+def test_clash_player_mod_reversal(player_mod, player_blk, npc_atk, expected_npc_damage):
     player = Character()
     npc = Character()
     npc_hp_before_clash = npc.hp
@@ -97,3 +97,19 @@ def test_clash_player_mod(player_mod, player_blk, npc_atk, expected_npc_damage):
     clash("HI", player_blk, player_mod, player, npc_atk, "HI", uuid4(), npc)
 
     assert npc.hp == npc_hp_before_clash - expected_npc_damage
+
+
+clash_test_data_player_mod_overwhelm = [
+    ("HI", "LO", 0),
+]
+@pytest.mark.parametrize("player_blk, npc_atk, expected_player_damage", clash_test_data_player_mod_overwhelm)
+def test_clash_player_mod_overwhelm(player_blk, npc_atk, expected_player_damage):
+    player = Character()
+    npc = Character()
+    player_hp_before_clash = player.hp
+
+    clash("HI", player_blk, "Overwhelm", player, npc_atk, "LO", uuid4(), npc)
+
+    actual = player.hp
+    expected = player_hp_before_clash - expected_player_damage
+    assert actual == expected
