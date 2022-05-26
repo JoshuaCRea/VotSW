@@ -8,4 +8,4 @@ class Character:
     def receive_damage(self, damage_points):
         self.hp = self.hp - damage_points
         if self.hp <= 0:
-            self.is_alive = False
+            self.standing = False

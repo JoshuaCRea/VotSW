@@ -23,21 +23,21 @@ def test_receive_damage_reduces_hp_by_damage_points():
     assert actual == initial_hp - damage_points
 
 
-def test_reducing_hp_to_zero_sets_is_alive_to_false():
+def test_reducing_hp_to_zero_sets_standing_to_false():
     sut = Character()
     initial_hp = sut.hp
 
     sut.receive_damage(initial_hp)
-    actual = sut.is_alive
+    actual = sut.standing
 
     assert actual == False
 
 
-def test_reducing_hp_below_zero_sets_is_alive_to_false():
+def test_reducing_hp_below_zero_sets_standing_to_false():
     sut = Character()
     initial_hp = sut.hp
 
     sut.receive_damage(initial_hp + 1)
-    actual = sut.is_alive
+    actual = sut.standing
 
     assert actual == False
